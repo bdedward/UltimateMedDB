@@ -13,15 +13,21 @@ namespace UltimateMedDB.Business
             Bills = new List<Bill>();
         }
 
-        public static void AssignBill(string Name)
+        public void AssignNewBill(Bill newBill, string Name)
         {
             BillTableAdapter taBill = new BillTableAdapter();
-            var pid = taBill.GetPatientPID(Name);
+            int pid = (int)taBill.GetPatientPID("John Smith");
             BillTableAdapter taNewBill = new BillTableAdapter();
-            //taNewBill.AddNewBill(pid);
+            //Returns the Bill_id so that we may assign it in the Patient_Bill Connector Table.
+            var ScopeID = taNewBill.AddBillReturnScopeID(newBill.PatientType, newBill.MedicineCharge, newBill.DoctorCharge,
+                                            newBill.RoomCharge, newBill.OperationCharge, newBill.NursingCharge,
+                                            newBill.LabCharge, newBill.BillTotal, newBill.InsuranceCarrier);
+            //Add row to Patient_Bill table using PID and Bill_id
+            taNewBill.InsertBillByPidScopeID(pid, Convert.ToInt32(ScopeID));
+
+            //Add Bill to our Bills list
+            Bills.Add(newBill);
         }
-
-
 
         public static List<Bill> GetAllBillingRecords()
         {
@@ -52,25 +58,23 @@ namespace UltimateMedDB.Business
                             decimal operationCharge, decimal roomCharge, decimal medicineCharge,
                             decimal nursingCharge, string insuranceCarrier)
         {
-            Bill newBill = new Bill();
-            newBill.PatientType = patientType;
-            newBill.InsuranceCarrier = insuranceCarrier;
-            newBill.DoctorCharge = doctorCharge;
-            newBill.LabCharge = labCharge;
-            newBill.OperationCharge = operationCharge;
-            newBill.RoomCharge = roomCharge;
-            newBill.MedicineCharge = medicineCharge;
-            newBill.NursingCharge = nursingCharge;
+            Bill newBill = new Bill
+            {
+                PatientType = patientType,
+                InsuranceCarrier = insuranceCarrier,
+                DoctorCharge = doctorCharge,
+                LabCharge = labCharge,
+                OperationCharge = operationCharge,
+                RoomCharge = roomCharge,
+                MedicineCharge = medicineCharge,
+                NursingCharge = nursingCharge
+            };
 
             decimal total = doctorCharge + labCharge + operationCharge + nursingCharge + medicineCharge + roomCharge;
             newBill.BillTotal = total;
 
             Bills.Add(newBill);
         }
-
-
-
         public List<Bill> Bills;
-
     }
 }

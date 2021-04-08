@@ -9,7 +9,9 @@
 
 namespace UltimateMedDB.Business.dsUltimateMedDBTableAdapters
 {
-
+    partial class RoomTableAdapter
+    {
+    }
 
     public partial class Patient_BillTableAdapter
     {

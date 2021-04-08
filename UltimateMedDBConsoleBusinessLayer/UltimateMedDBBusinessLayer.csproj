@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllLabs.cs" />
     <Compile Include="Bill.cs" />
     <Compile Include="Billing.cs" />
     <Compile Include="Doctor.cs" />
@@ -62,6 +63,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Room.cs" />
+    <Compile Include="Rooms.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

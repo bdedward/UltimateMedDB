@@ -15,9 +15,11 @@ namespace UltimateMedDB.Business
 
         public void AddDoctor(string Name, string Department)
         {
-            Doctor doctor = new Doctor();
-            doctor.Name = Name;
-            doctor.Department = Department;
+            Doctor doctor = new Doctor
+            {
+                Name = Name,
+                Department = Department
+            };
             Doctors.Add(doctor);
         }
 

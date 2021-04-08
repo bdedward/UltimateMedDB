@@ -52,15 +52,17 @@ namespace UltimateMedDB.Business
                         int Age, int Weight, string Address,
                         string Phone, string Disease, string Doctor)
         {
-            Patient patient = new Patient();
-            patient.Name = Name;
-            patient.Gender = Gender;
-            patient.Age = Age;
-            patient.Weight = Weight;
-            patient.Address = Address;
-            patient.Phone = Phone;
-            patient.Disease = Disease;
-            patient.Doc_Id = Doctor;
+            Patient patient = new Patient
+            {
+                Name = Name,
+                Gender = Gender,
+                Age = Age,
+                Weight = Weight,
+                Address = Address,
+                Phone = Phone,
+                Disease = Disease,
+                Doc_Id = Doctor
+            };
             Patients.Add(patient);
         }
         public List<Patient> Patients;

@@ -9,10 +9,10 @@ namespace UltimateMedDB.Business
     public class Lab
     {
         public int Weight;
-        public string Doc_Id;
+        public int Doc_id;
         public DateTime Date;
         public string Category;
         public string PatientType;
-        public int Amount;
+        public decimal Amount;
     }
 }
