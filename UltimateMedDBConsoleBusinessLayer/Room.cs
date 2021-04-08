@@ -8,8 +8,8 @@ namespace UltimateMedDB.Business
 {
     public class Room
     {
-        public int Number;
-        public string Type;
-        public string Status;
+        public int Number { get; set; }
+        public string Type { get; set; }
+        public string Status { get; set; }
     }
 }

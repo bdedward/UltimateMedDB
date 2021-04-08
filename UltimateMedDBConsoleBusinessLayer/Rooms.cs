@@ -75,6 +75,6 @@ namespace UltimateMedDB.Business
 
 
         
-        public List<Room> HosptialRooms;
+        public List<Room> HosptialRooms { get; set; }
     }
 }

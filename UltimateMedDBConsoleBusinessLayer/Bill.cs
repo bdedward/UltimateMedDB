@@ -8,16 +8,15 @@ namespace UltimateMedDB.Business
 {
     public class Bill
     {
-        public string PatientType;
-        public int Pid;
-        public decimal MedicineCharge;
-        public decimal DoctorCharge;
-        public decimal RoomCharge;
-        public decimal OperationCharge;
-        public decimal NursingCharge;
-        public string InsuranceCarrier;
-        public decimal LabCharge;
-        public decimal BillTotal;
+        public string PatientType{ get; set; }
+        public decimal MedicineCharge { get; set; }
+        public decimal DoctorCharge { get; set; }
+        public decimal RoomCharge { get; set; }
+        public decimal OperationCharge { get; set; }
+        public decimal NursingCharge { get; set; }
+        public string InsuranceCarrier { get; set; }
+        public decimal LabCharge { get; set; }
+        public decimal BillTotal { get; set; }
 
     }
 }

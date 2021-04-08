@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimateMedDBConsole", "Ult
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimateMedDBBusinessLayer", "UltimateMedDBConsoleBusinessLayer\UltimateMedDBBusinessLayer.csproj", "{6698C3AA-996F-4C36-8A4A-6B812BD2175E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimateMedDBWPFClient", "UltimateMedDBWPFClient\UltimateMedDBWPFClient.csproj", "{84C51153-CC63-4132-9FBF-6DC5807956D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6698C3AA-996F-4C36-8A4A-6B812BD2175E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6698C3AA-996F-4C36-8A4A-6B812BD2175E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6698C3AA-996F-4C36-8A4A-6B812BD2175E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84C51153-CC63-4132-9FBF-6DC5807956D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84C51153-CC63-4132-9FBF-6DC5807956D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84C51153-CC63-4132-9FBF-6DC5807956D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84C51153-CC63-4132-9FBF-6DC5807956D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

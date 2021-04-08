@@ -70,10 +70,13 @@ namespace UltimateMedDBConsole
                 PatientType = "OutPatient",
                 Weight = 210
             };
-            AllLabs.AddLab(lab, "John Smith");
+            //AllLabs.AddLab(lab, "John Smith");
 
             List<Lab> LabsFromDatabase = AllLabs.GetAllLabs();
             Console.WriteLine("First Lab Amount: " + LabsFromDatabase[0].Amount);
+
+            Console.WriteLine("Get Bills by Patient ID: ");
+
 
             Console.WriteLine("Goodbye");
             Console.ReadKey();

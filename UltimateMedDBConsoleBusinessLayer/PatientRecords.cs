@@ -65,6 +65,6 @@ namespace UltimateMedDB.Business
             };
             Patients.Add(patient);
         }
-        public List<Patient> Patients;
+        public List<Patient> Patients { get; set; }
     }
 }

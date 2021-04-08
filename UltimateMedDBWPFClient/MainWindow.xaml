@@ -1,0 +1,25 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UltimateMedDBWPFClient"
+        xmlns:WPFClient="clr-namespace:UltimateMedDB.WPFClient" x:Class="UltimateMedDBWPFClient.MainWindow"
+        mc:Ignorable="d"
+        Title="Ultimate Medical DB" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <WPFClient:UltimateMedDBViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <StackPanel >
+            
+            <ComboBox ItemsSource="{Binding AllPatients}" DisplayMemberPath="Name" Width="250" SelectedItem ="{Binding SelectedPatient}"/>
+
+            <ComboBox ItemsSource="{Binding AllBills}" DisplayMemberPath="InsuranceCarrier" Width="150"/>
+
+            <ComboBox ItemsSource="{Binding PatientLabs}" DisplayMemberPath="Amount" Width="100"/>
+
+        </StackPanel>
+    </Grid>
+</Window>

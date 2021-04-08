@@ -10,13 +10,13 @@ namespace UltimateMedDB.Business
     public class Patient
     {
         public string Name { get; set; }
-        public string Gender;
-        public int Age;
-        public int Weight;
-        public string Address;
-        public string Phone;
-        public string Disease;
-        public string Doc_Id;
+        public string Gender { get; set; }
+        public int Age { get; set; }
+        public int Weight { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string Disease { get; set; }
+        public string Doc_Id { get; set; }
 
     }
 }

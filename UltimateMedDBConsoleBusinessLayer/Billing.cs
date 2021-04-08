@@ -13,6 +13,30 @@ namespace UltimateMedDB.Business
             Bills = new List<Bill>();
         }
 
+        public static List<Bill> GetBillsByPid(int pid)
+        {
+            List<Bill> PatientBills = new List<Bill>();
+            Patient_BillTableAdapter taBills = new Patient_BillTableAdapter();            
+            var dtBills = taBills.GetBillingbyPID(pid);
+
+            foreach (dsUltimateMedDB.Patient_BillRow billingRow in dtBills)
+            {
+            /*    Bill currentBill = new Bill
+                {
+                    PatientType = billingRow.PatientType,
+                    DoctorCharge = billingRow.DoctorCharge,
+                    LabCharge = billingRow.LabCharge,
+                    OperationCharge = billingRow.OperationCharge,
+                    RoomCharge = billingRow.RoomCharge,
+                    MedicineCharge = billingRow.MedicineCharge,
+                    NursingCharge = billingRow.NursingCharge,
+                    InsuranceCarrier = billingRow.InsuranceCarrier
+                }; */
+                //PatientBills.Add(currentBill);
+            }
+            return PatientBills;
+        }
+
         public void AssignNewBill(Bill newBill, string Name)
         {
             BillTableAdapter taBill = new BillTableAdapter();
@@ -75,6 +99,6 @@ namespace UltimateMedDB.Business
 
             Bills.Add(newBill);
         }
-        public List<Bill> Bills;
+        public List<Bill> Bills { get; set; }
     }
 }
