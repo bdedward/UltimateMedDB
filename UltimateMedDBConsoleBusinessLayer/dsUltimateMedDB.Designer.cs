@@ -48,6 +48,8 @@ namespace UltimateMedDB.Business {
         
         private global::System.Data.DataRelation relationFK_Patient_Room_Room;
         
+        private global::System.Data.DataRelation relationFK_Patient_Lab_Lab1;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -353,6 +355,7 @@ namespace UltimateMedDB.Business {
             this.relationFK_Patient_Lab_Patient = this.Relations["FK_Patient_Lab_Patient"];
             this.relationFK_Patient_Room_Patient = this.Relations["FK_Patient_Room_Patient"];
             this.relationFK_Patient_Room_Room = this.Relations["FK_Patient_Room_Room"];
+            this.relationFK_Patient_Lab_Lab1 = this.Relations["FK_Patient_Lab_Lab1"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -397,6 +400,10 @@ namespace UltimateMedDB.Business {
                         this.tableRoom.IdColumn}, new global::System.Data.DataColumn[] {
                         this.tablePatient_Room.Room_idColumn}, false);
             this.Relations.Add(this.relationFK_Patient_Room_Room);
+            this.relationFK_Patient_Lab_Lab1 = new global::System.Data.DataRelation("FK_Patient_Lab_Lab1", new global::System.Data.DataColumn[] {
+                        this.tableLab.IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tablePatient_Lab.Lab_idColumn}, false);
+            this.Relations.Add(this.relationFK_Patient_Lab_Lab1);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1709,14 +1716,17 @@ namespace UltimateMedDB.Business {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Patient_LabRow AddPatient_LabRow(PatientRow parentPatientRowByFK_Patient_Lab_Patient, int Lab_id) {
+            public Patient_LabRow AddPatient_LabRow(PatientRow parentPatientRowByFK_Patient_Lab_Patient, LabRow parentLabRowByFK_Patient_Lab_Lab1) {
                 Patient_LabRow rowPatient_LabRow = ((Patient_LabRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
-                        Lab_id};
+                        null};
                 if ((parentPatientRowByFK_Patient_Lab_Patient != null)) {
                     columnValuesArray[1] = parentPatientRowByFK_Patient_Lab_Patient[0];
+                }
+                if ((parentLabRowByFK_Patient_Lab_Lab1 != null)) {
+                    columnValuesArray[2] = parentLabRowByFK_Patient_Lab_Lab1[0];
                 }
                 rowPatient_LabRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPatient_LabRow);
@@ -3258,6 +3268,17 @@ namespace UltimateMedDB.Business {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_Patient_Lab_Patient"]);
                 }
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public LabRow LabRow {
+                get {
+                    return ((LabRow)(this.GetParentRow(this.Table.ParentRelations["FK_Patient_Lab_Lab1"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Patient_Lab_Lab1"]);
+                }
+            }
         }
         
         /// <summary>
@@ -3488,6 +3509,17 @@ namespace UltimateMedDB.Business {
                 }
                 set {
                     this[this.tableLab.AmountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public Patient_LabRow[] GetPatient_LabRows() {
+                if ((this.Table.ChildRelations["FK_Patient_Lab_Lab1"] == null)) {
+                    return new Patient_LabRow[0];
+                }
+                else {
+                    return ((Patient_LabRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Patient_Lab_Lab1"])));
                 }
             }
         }
@@ -3926,7 +3958,7 @@ SELECT Id, Name, Gender, Age, Weight, Address, Phone, Disease, Doc_Id FROM Patie
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT Id, Name, Gender, Age, Weight, Address, Phone, Disease, Doc_Id FROM dbo.Pa" +
@@ -3934,8 +3966,9 @@ SELECT Id, Name, Gender, Age, Weight, Address, Phone, Disease, Doc_Id FROM Patie
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"INSERT INTO [dbo].[Patient] ([Name], [Gender], [Age], [Weight], [Address], [Phone], [Disease], [Doc_Id]) VALUES (@Name, @Gender, @Age, @Weight, @Address, @Phone, @Disease, @Doc_Id);
-SELECT Id, Name, Gender, Age, Weight, Address, Phone, Disease, Doc_Id FROM Patient WHERE (Id = SCOPE_IDENTITY())";
+            this._commandCollection[1].CommandText = "INSERT INTO [dbo].[Patient] ([Name], [Gender], [Age], [Weight], [Address], [Phone" +
+                "], [Disease], [Doc_Id]) \r\nVALUES (@Name, @Gender, @Age, @Weight, @Address, @Phon" +
+                "e, @Disease, @Doc_Id);\r\n";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.VarChar, 100, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Gender", global::System.Data.SqlDbType.VarChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "Gender", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -3950,6 +3983,12 @@ SELECT Id, Name, Gender, Age, Weight, Address, Phone, Disease, Doc_Id FROM Patie
             this._commandCollection[2].CommandText = "SELECT Id\r\nFROM     Patient\r\nWHERE  (Name = @Param1)";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param1", global::System.Data.SqlDbType.VarChar, 100, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "SELECT Name, Gender, Age, Weight, Address, Phone, Disease, Doc_Id FROM dbo.Patien" +
+                "t\r\nWHERE Id = @Param1";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param1", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3971,6 +4010,18 @@ SELECT Id, Name, Gender, Age, Weight, Address, Phone, Disease, Doc_Id FROM Patie
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual dsUltimateMedDB.PatientDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsUltimateMedDB.PatientDataTable dataTable = new dsUltimateMedDB.PatientDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual dsUltimateMedDB.PatientDataTable GetPatientsById(int Param1) {
+            this.Adapter.SelectCommand = this.CommandCollection[3];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(Param1));
             dsUltimateMedDB.PatientDataTable dataTable = new dsUltimateMedDB.PatientDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -4559,7 +4610,7 @@ SELECT Id, PatientType, MedicineCharge, DoctorCharge, RoomCharge, OperationCharg
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT Id, PatientType, MedicineCharge, DoctorCharge, RoomCharge, OperationCharge" +
@@ -4582,18 +4633,13 @@ SELECT SCOPE_IDENTITY()";
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InsuranceCarrier", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "InsuranceCarrier", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "SELECT Id\r\nFROM     Patient\r\nWHERE  (Name = @Param1)";
-            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param1", global::System.Data.SqlDbType.VarChar, 100, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = "INSERT INTO Patient_Bill (Pid, Bill_id) values (@Param1, @Param2);\r\n\r\nSELECT Id, " +
+            this._commandCollection[2].CommandText = "INSERT INTO Patient_Bill (Pid, Bill_id) values (@Param1, @Param2);\r\n\r\nSELECT Id, " +
                 "PatientType, MedicineCharge, DoctorCharge, RoomCharge, OperationCharge, NursingC" +
                 "harge, LabCharge, BillTotal, InsuranceCarrier FROM Bill WHERE (Id = SCOPE_IDENTI" +
                 "TY())";
-            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param1", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Pid", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param2", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Bill_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param1", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Pid", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param2", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Bill_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4889,43 +4935,9 @@ SELECT SCOPE_IDENTITY()";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual global::System.Nullable<int> GetPatientPID(string Param1) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
-            if ((Param1 == null)) {
-                throw new global::System.ArgumentNullException("Param1");
-            }
-            else {
-                command.Parameters[0].Value = ((string)(Param1));
-            }
-            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
-            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                command.Connection.Open();
-            }
-            object returnValue;
-            try {
-                returnValue = command.ExecuteScalar();
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    command.Connection.Close();
-                }
-            }
-            if (((returnValue == null) 
-                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
-                return new global::System.Nullable<int>();
-            }
-            else {
-                return new global::System.Nullable<int>(((int)(returnValue)));
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
         public virtual int InsertBillByPidScopeID(int Param1, int Param2) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
             command.Parameters[0].Value = ((int)(Param1));
             command.Parameters[1].Value = ((int)(Param2));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
@@ -5117,14 +5129,12 @@ SELECT SCOPE_IDENTITY()";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT Patient.Name, Patient.Gender, Patient.Age, Patient.Weight, Patient.Address, Patient.Phone, Patient.Disease, Patient.Doc_Id, Bill.PatientType, Bill.MedicineCharge, Bill.DoctorCharge, Bill.RoomCharge, Bill.OperationCharge, 
-                  Bill.NursingCharge, Bill.LabCharge, Bill.BillTotal, Bill.InsuranceCarrier
+            this._commandCollection[1].CommandText = @"SELECT Bill.PatientType, Bill.MedicineCharge, Bill.DoctorCharge, Bill.RoomCharge, Bill.OperationCharge, Bill.NursingCharge, Bill.LabCharge, Bill.BillTotal, Bill.InsuranceCarrier
 FROM     Patient_Bill INNER JOIN
-                  Bill ON Patient_Bill.Bill_id = Bill.Id INNER JOIN
-                  Patient ON Patient_Bill.Pid = Patient.Id
-WHERE  (Patient_Bill.Pid = @Pid)";
+                  Bill ON Patient_Bill.Bill_id = Bill.Id
+WHERE  (Patient_Bill.Pid = @Param1)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Pid", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Pid", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param1", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Pid", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5155,9 +5165,9 @@ WHERE  (Patient_Bill.Pid = @Pid)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual dsUltimateMedDB.Patient_BillDataTable GetBillingbyPID(int Pid) {
+        public virtual dsUltimateMedDB.Patient_BillDataTable GetBillingbyPID(int Param1) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(Pid));
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(Param1));
             dsUltimateMedDB.Patient_BillDataTable dataTable = new dsUltimateMedDB.Patient_BillDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -5591,7 +5601,7 @@ WHERE  (Patient_Bill.Pid = @Pid)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
-        public virtual int InsertPidLabID(int Param1, int Param2) {
+        public virtual int InsertByPidLabID(int Param1, int Param2) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
             command.Parameters[0].Value = ((int)(Param1));
             command.Parameters[1].Value = ((int)(Param2));
@@ -6508,7 +6518,7 @@ SELECT Id, Room_no, RoomType, Status FROM Room WHERE (Id = @Id)";
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Lab] WHERE (([Id] = @Original_Id) AND ([Weight] = @Original_Weight) AND ([Doc_id] = @Original_Doc_id) AND ([Date] = @Original_Date) AND ([Category] = @Original_Category) AND ([PatientType] = @Original_PatientType) AND ([Amount] = @Original_Amount))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Lab] WHERE (([Id] = @Original_Id) AND ([Weight] = @Original_Weight) AND ([Doc_id] = @Original_Doc_id) AND ([Date] = @Original_Date) AND ([Category] = @Original_Category) AND ([PatientType] = @Original_PatientType) AND ([Amount] = @Original_Amount))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Weight", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Weight", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -6519,10 +6529,8 @@ SELECT Id, Room_no, RoomType, Status FROM Room WHERE (Id = @Id)";
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Amount", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Amount", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [Lab] ([Weight], [Doc_id], [Date], [Category], [PatientType], [Amount" +
-                "]) VALUES (@Weight, @Doc_id, @Date, @Category, @PatientType, @Amount);\r\nSELECT I" +
-                "d, Weight, Doc_id, Date, Category, PatientType, Amount FROM Lab WHERE (Id = SCOP" +
-                "E_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Lab] ([Weight], [Doc_id], [Date], [Category], [PatientType], [Amount]) VALUES (@Weight, @Doc_id, @Date, @Category, @PatientType, @Amount);
+SELECT Id, Weight, Doc_id, Date, Category, PatientType, Amount FROM Lab WHERE (Id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Weight", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Weight", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Doc_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Doc_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -6532,7 +6540,7 @@ SELECT Id, Room_no, RoomType, Status FROM Room WHERE (Id = @Id)";
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Amount", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [Lab] SET [Weight] = @Weight, [Doc_id] = @Doc_id, [Date] = @Date, [Category] = @Category, [PatientType] = @PatientType, [Amount] = @Amount WHERE (([Id] = @Original_Id) AND ([Weight] = @Original_Weight) AND ([Doc_id] = @Original_Doc_id) AND ([Date] = @Original_Date) AND ([Category] = @Original_Category) AND ([PatientType] = @Original_PatientType) AND ([Amount] = @Original_Amount));
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Lab] SET [Weight] = @Weight, [Doc_id] = @Doc_id, [Date] = @Date, [Category] = @Category, [PatientType] = @PatientType, [Amount] = @Amount WHERE (([Id] = @Original_Id) AND ([Weight] = @Original_Weight) AND ([Doc_id] = @Original_Doc_id) AND ([Date] = @Original_Date) AND ([Category] = @Original_Category) AND ([PatientType] = @Original_PatientType) AND ([Amount] = @Original_Amount));
 SELECT Id, Weight, Doc_id, Date, Category, PatientType, Amount FROM Lab WHERE (Id = @Id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Weight", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Weight", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -6564,13 +6572,13 @@ SELECT Id, Weight, Doc_id, Date, Category, PatientType, Amount FROM Lab WHERE (I
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Id, Weight, Doc_id, Date, Category, PatientType, Amount FROM Lab";
+            this._commandCollection[0].CommandText = "SELECT Id, Weight, Doc_id, Date, Category, PatientType, Amount FROM dbo.Lab";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "INSERT INTO Lab\r\n                  (Weight, Doc_id, Date, Category, PatientType, " +
-                "Amount)\r\nVALUES (@Weight,@Doc_id,@Date,@Category,@PatientType,@Amount); \r\n\r\nSELE" +
-                "CT  SCOPE_IDENTITY()";
+            this._commandCollection[1].CommandText = "INSERT INTO [dbo].[Lab] ([Weight], [Doc_id], [Date], [Category], [PatientType], [" +
+                "Amount]) VALUES (@Weight, @Doc_id, @Date, @Category, @PatientType, @Amount);\r\n\r\n" +
+                "SELECT SCOPE_IDENTITY()";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Weight", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Weight", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Doc_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Doc_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -7075,6 +7083,15 @@ SELECT Id, Weight, Doc_id, Date, Category, PatientType, Amount FROM Lab WHERE (I
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._labTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Lab.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._labTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._patient_BillTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Patient_Bill.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -7099,15 +7116,6 @@ SELECT Id, Weight, Doc_id, Date, Category, PatientType, Amount FROM Lab WHERE (I
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._patient_RoomTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._labTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Lab.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._labTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -7145,6 +7153,14 @@ SELECT Id, Weight, Doc_id, Date, Category, PatientType, Amount FROM Lab WHERE (I
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._labTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Lab.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._labTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._patient_BillTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Patient_Bill.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -7169,14 +7185,6 @@ SELECT Id, Weight, Doc_id, Date, Category, PatientType, Amount FROM Lab WHERE (I
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._labTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Lab.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._labTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             return result;
         }
         
@@ -7187,14 +7195,6 @@ SELECT Id, Weight, Doc_id, Date, Category, PatientType, Amount FROM Lab WHERE (I
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private int UpdateDeletedRows(dsUltimateMedDB dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._labTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Lab.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._labTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._patient_RoomTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Patient_Room.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -7216,6 +7216,14 @@ SELECT Id, Weight, Doc_id, Date, Category, PatientType, Amount FROM Lab WHERE (I
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._patient_BillTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._labTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Lab.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._labTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

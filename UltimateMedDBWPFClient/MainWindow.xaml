@@ -13,8 +13,30 @@
 
     <Grid>
         <StackPanel >
-            
-            <ComboBox ItemsSource="{Binding AllPatients}" DisplayMemberPath="Name" Width="250" SelectedItem ="{Binding SelectedPatient}"/>
+            <TextBox Text="Patient Lookup" />
+            <ComboBox Name="cboAllPatients"  SelectedItem ="{Binding SelectedPatient}" ItemsSource="{Binding AllPatients}" DisplayMemberPath="Name" Width="250" />
+            <DataGrid ItemsSource="{Binding SelectedPatient.Patients}" CanUserAddRows="True" />
+
+            <TextBox Text="Add a New Patient" />
+            <WrapPanel>
+                <Label>Name</Label>
+                <TextBox Width="140" Text="{Binding NewPatient.Name}" />
+                <Label>Gender</Label>
+                <TextBox Width="80" Text="{Binding NewPatient.Gender}" />
+                <Label>Age</Label>
+                <TextBox Width="30" Text="{Binding NewPatient.Age}" />
+                <Label>Phone</Label>
+                <TextBox Width="140" Text="{Binding NewPatient.Phone}" />
+                <Label>Weight</Label>
+                <TextBox Width="30" Text="{Binding NewPatient.Weight}" />
+                <Label>Address</Label>                
+                <TextBox Width="190" Text="{Binding NewPatient.Address}" />
+                <Label>Doc_Id</Label>
+                <TextBox Width="48" Text="{Binding NewPatient.Doc_Id}" />
+                <Label>Disease</Label>
+                <TextBox Width="85" Text="{Binding NewPatient.Disease}" />
+            </WrapPanel>
+            <Button Click="Button_Click" Width="125">Save New Patient</Button>
 
             <ComboBox ItemsSource="{Binding AllBills}" DisplayMemberPath="InsuranceCarrier" Width="150"/>
 

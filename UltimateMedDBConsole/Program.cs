@@ -15,6 +15,7 @@ namespace UltimateMedDBConsole
         {
             Console.WriteLine("Testing my application");
 
+            /*
             //Instantiate the Doctor List
             DoctorList doctors = new DoctorList();
 
@@ -58,9 +59,11 @@ namespace UltimateMedDBConsole
             List<Room> RoomsFromDatabase = Rooms.GetAllRooms();
             Console.WriteLine("First Room Number in Table: " + RoomsFromDatabase[0].Number);
 
-
+            */
+            /*
             Console.WriteLine("Testing AllLabs Class\n\n");
             //Add Labs
+            AllLabs labs = new AllLabs();
             Lab lab = new Lab
             {
                 Amount = 55,
@@ -68,15 +71,28 @@ namespace UltimateMedDBConsole
                 Date = new DateTime(2019, 12, 14),
                 Doc_id = 1,
                 PatientType = "OutPatient",
+                Weight = 135
+            };
+            labs.AddLab(lab, "Jenny Stone");
+
+            Lab lab1 = new Lab
+            {
+                Amount = 33,
+                Category = "Urine",
+                Date = new DateTime(2019, 12, 11),
+                Doc_id = 3,
+                PatientType = "OutPatient",
                 Weight = 210
             };
-            //AllLabs.AddLab(lab, "John Smith");
+            labs.AddLab(lab1, "John Smith");
 
             List<Lab> LabsFromDatabase = AllLabs.GetAllLabs();
             Console.WriteLine("First Lab Amount: " + LabsFromDatabase[0].Amount);
-
-            Console.WriteLine("Get Bills by Patient ID: ");
-
+            */
+            //List<Bill> allBills = Billing.GetAllBillingRecords();
+            //List<Patient> allpatients = Patient.GetAllPatients();
+            //List<Bill> billsByPid = Billing.GetBillsByPid(3);
+ 
 
             Console.WriteLine("Goodbye");
             Console.ReadKey();

@@ -39,18 +39,25 @@ namespace UltimateMedDB.Business
             return allLabs;
         }
 
-        public static void AddLab(Lab newLab, string Name)
+        /*Function which takes two parameters
+            1) The new lab to be inserted into the database
+            2) The name of the patient to assign this lab to
+        The Pid is located first
+        Query is then executed to insert new lab and return the Scope_ID of the new lab
+        The Patient is then associated with the new Lab using connector table Patient_Lab
+        */
+        public void AddLab(Lab newLab, string Name)
         {
             LabTableAdapter taLabs = new LabTableAdapter();
             PatientTableAdapter patientLookUp = new PatientTableAdapter();
             int pid = (int)patientLookUp.GetPatientID(Name);
             int scope_id = Convert.ToInt32(taLabs.AddNewLabReturnScopeID(newLab.Weight, newLab.Doc_id, newLab.Date, newLab.Category, newLab.PatientType, newLab.Amount));
             Patient_LabTableAdapter labPatientConnect = new Patient_LabTableAdapter();
-            labPatientConnect.InsertPidLabID(pid, scope_id);
-            //Labs.Add(newLab);
+            labPatientConnect.InsertByPidLabID(pid, scope_id);
+            Labs.Add(newLab);
         }
 
 
-        public List<Lab> Labs;
+        public List<Lab> Labs { get; set; }
     }
 }

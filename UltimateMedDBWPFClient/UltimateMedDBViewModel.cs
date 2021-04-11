@@ -14,7 +14,7 @@ namespace UltimateMedDB.WPFClient
         {
             get
             {
-                return PatientRecords.GetAllPatients();
+                return Patient.GetAllPatients();
             }
         }
         private Patient _selectedPatient = new Patient();
@@ -29,6 +29,20 @@ namespace UltimateMedDB.WPFClient
                 _selectedPatient = value;
             }
         }
+
+        private Patient _newPatient = new Patient();
+        public Patient NewPatient
+        {
+            get
+            {
+                return _newPatient;
+            }
+            set
+            {
+                _newPatient = value;
+            }
+        }
+
 
 
         public List<Bill> AllBills

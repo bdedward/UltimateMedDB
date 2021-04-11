@@ -24,5 +24,19 @@ namespace UltimateMedDBWPFClient
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //Use implicit casting with caution
+            UltimateMedDB.WPFClient.UltimateMedDBViewModel currentViewModel =
+                (UltimateMedDB.WPFClient.UltimateMedDBViewModel) DataContext;
+
+            UltimateMedDB.Business.Patient newPatient = currentViewModel.NewPatient;
+
+            currentViewModel.NewPatient.SaveNewPatient(newPatient.Name, newPatient.Gender, newPatient.Age,
+                newPatient.Weight, newPatient.Address, newPatient.Phone, newPatient.Disease, newPatient.Doc_Id);
+
+            BindingOperations.GetBindingExpressionBase(cboAllPatients, ComboBox.ItemsSourceProperty).UpdateTarget();
+        }
     }
 }

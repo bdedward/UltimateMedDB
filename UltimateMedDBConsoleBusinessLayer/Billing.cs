@@ -16,31 +16,30 @@ namespace UltimateMedDB.Business
         public static List<Bill> GetBillsByPid(int pid)
         {
             List<Bill> PatientBills = new List<Bill>();
-            Patient_BillTableAdapter taBills = new Patient_BillTableAdapter();            
+            Patient_BillTableAdapter taBills = new Patient_BillTableAdapter();
             var dtBills = taBills.GetBillingbyPID(pid);
 
             foreach (dsUltimateMedDB.Patient_BillRow billingRow in dtBills)
             {
-            /*    Bill currentBill = new Bill
+                Bill currentBill = new Bill
                 {
-                    PatientType = billingRow.PatientType,
-                    DoctorCharge = billingRow.DoctorCharge,
-                    LabCharge = billingRow.LabCharge,
-                    OperationCharge = billingRow.OperationCharge,
-                    RoomCharge = billingRow.RoomCharge,
-                    MedicineCharge = billingRow.MedicineCharge,
-                    NursingCharge = billingRow.NursingCharge,
-                    InsuranceCarrier = billingRow.InsuranceCarrier
-                }; */
-                //PatientBills.Add(currentBill);
+                    PatientType = billingRow.BillRow.PatientType,
+                    DoctorCharge = billingRow.BillRow.DoctorCharge,
+                    LabCharge = billingRow.BillRow.LabCharge,
+                    OperationCharge = billingRow.BillRow.OperationCharge,
+                    RoomCharge = billingRow.BillRow.RoomCharge,
+                    MedicineCharge = billingRow.BillRow.MedicineCharge,
+                    NursingCharge = billingRow.BillRow.NursingCharge,
+                    InsuranceCarrier = billingRow.BillRow.InsuranceCarrier
+                };
             }
             return PatientBills;
         }
 
         public void AssignNewBill(Bill newBill, string Name)
         {
-            BillTableAdapter taBill = new BillTableAdapter();
-            int pid = (int)taBill.GetPatientPID("John Smith");
+            PatientTableAdapter taBill = new PatientTableAdapter();
+            int pid = (int)taBill.GetPatientID("John Smith");
             BillTableAdapter taNewBill = new BillTableAdapter();
             //Returns the Bill_id so that we may assign it in the Patient_Bill Connector Table.
             var ScopeID = taNewBill.AddBillReturnScopeID(newBill.PatientType, newBill.MedicineCharge, newBill.DoctorCharge,
