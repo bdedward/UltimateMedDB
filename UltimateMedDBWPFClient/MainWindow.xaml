@@ -13,10 +13,6 @@
 
     <Grid>
         <StackPanel >
-            <TextBox Text="Patient Lookup" FontSize="20"/>
-            <ComboBox Name="cboAllPatients"  SelectedItem ="{Binding SelectedPatient}" ItemsSource="{Binding AllPatients}" DisplayMemberPath="Name" Width="250" />
-            <DataGrid ItemsSource="{Binding SelectedPatient.Patients}" CanUserAddRows="True" />
-
             <TextBox Text="Add a New Patient" FontSize="20" />
             <WrapPanel>
                 <Label>Name</Label>
@@ -41,14 +37,24 @@
             </WrapPanel>
             <Button Click="Button_Click" Width="125">Save New Patient</Button>
 
-            <TextBox Text="Get Patient Bills" FontSize="20" />
-            <ComboBox ItemsSource="{Binding AllBills}" DisplayMemberPath="InsuranceCarrier" Width="150"/>
+            <TextBox Text="Patient Lookup" FontSize="20"/>
+            <ComboBox Name="cboAllPatients"  SelectedItem ="{Binding SelectedPatient}" ItemsSource="{Binding AllPatients}" DisplayMemberPath="Name" Width="250" SelectionChanged="CboAllPatients_SelectionChanged" />
+            <DataGrid ItemsSource="{Binding SelectedPatient.Patients}" CanUserAddRows="True" />
+
+
+            <TextBox Text="Patient's Bill(s)" FontSize="20" />
+            <!--
+            <ComboBox Name="cboPatientBills"  SelectedItem ="{Binding SelectedPatient}" ItemsSource="{Binding AllPatients}" DisplayMemberPath="BillTotal" Width="150"/>
+            -->
+            <DataGrid Name="DgPatientBills" ItemsSource="{Binding BillsByPid}" SelectionChanged="DataGrid_SelectionChanged" />                       
+            
 
             <TextBox Text="Bill Patient" FontSize="20" />
-
             <TextBox Text="Get Patient Labs" FontSize="20" />
-            <ComboBox ItemsSource="{Binding PatientLabs}" DisplayMemberPath="Amount" Width="100"/>
-
+            <ComboBox Name="cboPatientLabs" SelectedItem ="{Binding SelectedPatient}" ItemsSource="{Binding PatientLabs}" DisplayMemberPath="Amount" Width="100"/>
+            <DataGrid ItemsSource="{Binding PatientLabs}" CanUserAddRows="True" />
+            
+            
             <TextBox Text="New Lab for Patient" FontSize="20" />
 
         </StackPanel>

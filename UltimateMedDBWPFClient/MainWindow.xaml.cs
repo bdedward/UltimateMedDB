@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UltimateMedDB.Business;
 
 namespace UltimateMedDBWPFClient
 {
@@ -29,7 +30,7 @@ namespace UltimateMedDBWPFClient
         {
             //Use implicit casting with caution
             UltimateMedDB.WPFClient.UltimateMedDBViewModel currentViewModel =
-                (UltimateMedDB.WPFClient.UltimateMedDBViewModel) DataContext;
+                (UltimateMedDB.WPFClient.UltimateMedDBViewModel)DataContext;
 
             UltimateMedDB.Business.Patient newPatient = currentViewModel.NewPatient;
 
@@ -49,6 +50,43 @@ namespace UltimateMedDBWPFClient
             NewPatientPhone.Text = String.Empty;
 
             MessageBox.Show("Patient Has Been Successfully Saved.");
+        }
+
+
+
+        private void ProcessComboBoxes(ComboBox senderBox)
+        {
+            //ComboBox dependentBox = cboPatientBills;
+            //ComboBox independentBox = cboAllPatients;
+            //Patient cast = (Patient) independentBox.SelectedItem;
+            // dependentBox.ItemsSource = senderBox.SelectedItem;
+
+            //int pid = Convert.ToInt32(cast.Pid);
+            //dependentBox.Items.Clear();
+            //cboPatientBills.ItemsSource = independentBox.SelectedItem;
+            //dependentBox.IsEnabled = true;
+        }
+
+        private void cboAllPatients_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ProcessComboBoxes(sender as ComboBox);
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            DataGrid dependentGrid = DgPatientBills;
+            //dependentGrid.SelectedValue = cboAllPatients.SelectedValue;
+            //dependentGrid.SelectedItems.Clear();
+            dependentGrid.Items.Refresh();
+            //dependentGrid.SelectedItems.Add(cboAllPatients.SelectedValue);
+        }
+
+        private void CboAllPatients_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            DataGrid dependentGrid = DgPatientBills;
+            dependentGrid.Items.Refresh();
         }
     }
 }

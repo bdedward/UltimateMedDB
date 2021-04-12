@@ -4610,7 +4610,7 @@ SELECT Id, PatientType, MedicineCharge, DoctorCharge, RoomCharge, OperationCharg
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT Id, PatientType, MedicineCharge, DoctorCharge, RoomCharge, OperationCharge" +
@@ -4633,13 +4633,21 @@ SELECT SCOPE_IDENTITY()";
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InsuranceCarrier", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "InsuranceCarrier", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "INSERT INTO Patient_Bill (Pid, Bill_id) values (@Param1, @Param2);\r\n\r\nSELECT Id, " +
+            this._commandCollection[2].CommandText = @"SELECT Bill.PatientType, Bill.MedicineCharge, Bill.DoctorCharge, Bill.RoomCharge, Bill.OperationCharge, Bill.NursingCharge, Bill.LabCharge, Bill.BillTotal, Bill.InsuranceCarrier
+FROM     Patient_Bill INNER JOIN
+                  Bill ON Patient_Bill.Bill_id = Bill.Id
+WHERE  (Patient_Bill.Pid = @Param1)";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param1", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Pid", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "INSERT INTO Patient_Bill (Pid, Bill_id) values (@Param1, @Param2);\r\n\r\nSELECT Id, " +
                 "PatientType, MedicineCharge, DoctorCharge, RoomCharge, OperationCharge, NursingC" +
                 "harge, LabCharge, BillTotal, InsuranceCarrier FROM Bill WHERE (Id = SCOPE_IDENTI" +
                 "TY())";
-            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param1", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Pid", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param2", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Bill_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param1", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Pid", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param2", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Bill_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4661,6 +4669,18 @@ SELECT SCOPE_IDENTITY()";
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual dsUltimateMedDB.BillDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsUltimateMedDB.BillDataTable dataTable = new dsUltimateMedDB.BillDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual dsUltimateMedDB.BillDataTable GetBillingByPID(int Param1) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(Param1));
             dsUltimateMedDB.BillDataTable dataTable = new dsUltimateMedDB.BillDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -4937,7 +4957,7 @@ SELECT SCOPE_IDENTITY()";
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
         public virtual int InsertBillByPidScopeID(int Param1, int Param2) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
             command.Parameters[0].Value = ((int)(Param1));
             command.Parameters[1].Value = ((int)(Param2));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;

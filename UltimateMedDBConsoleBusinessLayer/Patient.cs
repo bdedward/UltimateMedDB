@@ -33,6 +33,7 @@ namespace UltimateMedDB.Business
             foreach (dsUltimateMedDB.PatientRow patientRow in dtMenu.Rows)
             {
                 Patient currentPatient = new Patient();
+                currentPatient.Pid = patientRow.Id;
                 currentPatient.Address = patientRow.Address;
                 currentPatient.Age = patientRow.Age;
                 currentPatient.Name = patientRow.Name;
@@ -55,6 +56,8 @@ namespace UltimateMedDB.Business
         }
 
         public List<Patient> Patients { get; set; }
+
+        public int Pid { get; set; }
         public string Name { get; set; }
         public string Gender { get; set; }
         public int Age { get; set; }

@@ -9,7 +9,7 @@ namespace UltimateMedDB.WPFClient
 {
     public class UltimateMedDBViewModel
     {
- 
+
         public List<Patient> AllPatients
         {
             get
@@ -27,6 +27,7 @@ namespace UltimateMedDB.WPFClient
             set
             {
                 _selectedPatient = value;
+                //RaisePropertyChanged();
             }
         }
 
@@ -49,7 +50,28 @@ namespace UltimateMedDB.WPFClient
         {
             get
             {
-                return Billing.GetAllBillingRecords();
+                return Bill.GetAllBillingRecords();
+            }
+        }
+
+        public List<Bill> BillsByPid
+        {
+            get
+            {
+                return Bill.GetBillsByPid(SelectedPatient.Pid);
+            }
+        }
+
+        private Bill _selectedBill = new Bill();
+        public Bill SelectedBill
+        {
+            get
+            {
+                return _selectedBill;
+            }
+            set
+            {
+                _selectedBill = value;
             }
         }
 
@@ -60,6 +82,7 @@ namespace UltimateMedDB.WPFClient
                 return AllLabs.GetAllLabs();
             }
         }
+
 
 
     }

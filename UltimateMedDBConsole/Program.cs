@@ -89,9 +89,9 @@ namespace UltimateMedDBConsole
             List<Lab> LabsFromDatabase = AllLabs.GetAllLabs();
             Console.WriteLine("First Lab Amount: " + LabsFromDatabase[0].Amount);
             */
-            //List<Bill> allBills = Billing.GetAllBillingRecords();
+            //List<Bill> allBills = Bill.GetAllBillingRecords();
             //List<Patient> allpatients = Patient.GetAllPatients();
-            //List<Bill> billsByPid = Billing.GetBillsByPid(3);
+            List<Bill> billsByPid = Bill.GetBillsByPid(3);
  
 
             Console.WriteLine("Goodbye");
