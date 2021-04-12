@@ -6,41 +6,50 @@
         xmlns:local="clr-namespace:UltimateMedDBWPFClient"
         xmlns:WPFClient="clr-namespace:UltimateMedDB.WPFClient" x:Class="UltimateMedDBWPFClient.MainWindow"
         mc:Ignorable="d"
-        Title="Ultimate Medical DB" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Ultimate Medical DB" Height="650" Width="800" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <WPFClient:UltimateMedDBViewModel/>
     </Window.DataContext>
 
     <Grid>
         <StackPanel >
-            <TextBox Text="Patient Lookup" />
+            <TextBox Text="Patient Lookup" FontSize="20"/>
             <ComboBox Name="cboAllPatients"  SelectedItem ="{Binding SelectedPatient}" ItemsSource="{Binding AllPatients}" DisplayMemberPath="Name" Width="250" />
             <DataGrid ItemsSource="{Binding SelectedPatient.Patients}" CanUserAddRows="True" />
 
-            <TextBox Text="Add a New Patient" />
+            <TextBox Text="Add a New Patient" FontSize="20" />
             <WrapPanel>
                 <Label>Name</Label>
-                <TextBox Width="140" Text="{Binding NewPatient.Name}" />
+                <TextBox Name="NewPatientName" Width="140" Text="{Binding NewPatient.Name}" />
                 <Label>Gender</Label>
-                <TextBox Width="80" Text="{Binding NewPatient.Gender}" />
+                <TextBox Name="NewPatientGender" Width="80" Text="{Binding NewPatient.Gender}" />
                 <Label>Age</Label>
-                <TextBox Width="30" Text="{Binding NewPatient.Age}" />
+                <TextBox Name="NewPatientAge" Width="30" Text="{Binding NewPatient.Age}" />
                 <Label>Phone</Label>
-                <TextBox Width="140" Text="{Binding NewPatient.Phone}" />
+                <TextBox Name="NewPatientPhone" Width="140" Text="{Binding NewPatient.Phone}" />
                 <Label>Weight</Label>
-                <TextBox Width="30" Text="{Binding NewPatient.Weight}" />
-                <Label>Address</Label>                
-                <TextBox Width="190" Text="{Binding NewPatient.Address}" />
+                <TextBox Name="NewPatientWeight" Width="30" Text="{Binding NewPatient.Weight}" />
+
+            </WrapPanel>
+            <WrapPanel>
+                <Label>Address</Label>
+                <TextBox Name ="NewPatientAddress" Width="190" Text="{Binding NewPatient.Address}" />
                 <Label>Doc_Id</Label>
-                <TextBox Width="48" Text="{Binding NewPatient.Doc_Id}" />
+                <TextBox Name ="NewPatientDocId" Width="48" Text="{Binding NewPatient.Doc_Id}" />
                 <Label>Disease</Label>
-                <TextBox Width="85" Text="{Binding NewPatient.Disease}" />
+                <TextBox Name="NewPatientDisease" Width="85" Text="{Binding NewPatient.Disease}" />
             </WrapPanel>
             <Button Click="Button_Click" Width="125">Save New Patient</Button>
 
+            <TextBox Text="Get Patient Bills" FontSize="20" />
             <ComboBox ItemsSource="{Binding AllBills}" DisplayMemberPath="InsuranceCarrier" Width="150"/>
 
+            <TextBox Text="Bill Patient" FontSize="20" />
+
+            <TextBox Text="Get Patient Labs" FontSize="20" />
             <ComboBox ItemsSource="{Binding PatientLabs}" DisplayMemberPath="Amount" Width="100"/>
+
+            <TextBox Text="New Lab for Patient" FontSize="20" />
 
         </StackPanel>
     </Grid>

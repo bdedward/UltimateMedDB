@@ -37,6 +37,18 @@ namespace UltimateMedDBWPFClient
                 newPatient.Weight, newPatient.Address, newPatient.Phone, newPatient.Disease, newPatient.Doc_Id);
 
             BindingOperations.GetBindingExpressionBase(cboAllPatients, ComboBox.ItemsSourceProperty).UpdateTarget();
+
+            //Clear fields once New Patient has been saved
+            NewPatientAddress.Text = String.Empty;
+            NewPatientWeight.Text = String.Empty;
+            NewPatientName.Text = String.Empty;
+            NewPatientAge.Text = String.Empty;
+            NewPatientDocId.Text = String.Empty;
+            NewPatientDisease.Text = String.Empty;
+            NewPatientGender.Text = String.Empty;
+            NewPatientPhone.Text = String.Empty;
+
+            MessageBox.Show("Patient Has Been Successfully Saved.");
         }
     }
 }
