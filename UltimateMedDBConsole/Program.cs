@@ -91,8 +91,8 @@ namespace UltimateMedDBConsole
             */
             //List<Bill> allBills = Bill.GetAllBillingRecords();
             //List<Patient> allpatients = Patient.GetAllPatients();
-            List<Bill> billsByPid = Bill.GetBillsByPid(3);
- 
+
+            var Labs = Lab.LabsByPatient("John Smith");
 
             Console.WriteLine("Goodbye");
             Console.ReadKey();

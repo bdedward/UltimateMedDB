@@ -4,12 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UltimateMedDBWPFClient"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:WPFClient="clr-namespace:UltimateMedDB.WPFClient" x:Class="UltimateMedDBWPFClient.MainWindow"
         mc:Ignorable="d"
-        Title="Ultimate Medical DB" Height="650" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Ultimate Medical DB" Icon="Icon1.ico" Height="650" Width="800" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <WPFClient:UltimateMedDBViewModel/>
     </Window.DataContext>
+
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="SelectedPatient">
+            <b:CallMethodAction TargetObject="{Binding}"
+                                 MethodName="BillsByPid" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
 
     <Grid>
         <StackPanel >
@@ -38,15 +46,18 @@
             <Button Click="Button_Click" Width="125">Save New Patient</Button>
 
             <TextBox Text="Patient Lookup" FontSize="20"/>
+            
             <ComboBox Name="cboAllPatients"  SelectedItem ="{Binding SelectedPatient}" ItemsSource="{Binding AllPatients}" DisplayMemberPath="Name" Width="250" SelectionChanged="CboAllPatients_SelectionChanged" />
-            <DataGrid ItemsSource="{Binding SelectedPatient.Patients}" CanUserAddRows="True" />
+            <DataGrid  ItemsSource="{Binding SelectedPatient.Patients}" CanUserAddRows="True" SourceUpdated="DataGrid_SourceUpdated" />
 
 
+            
+            
             <TextBox Text="Patient's Bill(s)" FontSize="20" />
             <!--
-            <ComboBox Name="cboPatientBills"  SelectedItem ="{Binding SelectedPatient}" ItemsSource="{Binding AllPatients}" DisplayMemberPath="BillTotal" Width="150"/>
-            -->
-            <DataGrid Name="DgPatientBills" ItemsSource="{Binding BillsByPid}" SelectionChanged="DataGrid_SelectionChanged" />                       
+            <ComboBox Name="cboPatientBills"  SelectedItem ="{Binding SelectedPatient}" ItemsSource="{Binding BillsByPid}" DisplayMemberPath="BillTotal" Width="150"/>
+            --> 
+            <DataGrid Name="DgPatientBills" ItemsSource="{Binding BillsByPid}" DataContext="" />                       
             
 
             <TextBox Text="Bill Patient" FontSize="20" />
@@ -56,6 +67,7 @@
             
             
             <TextBox Text="New Lab for Patient" FontSize="20" />
+            <WrapPanel></WrapPanel> 
 
         </StackPanel>
     </Grid>

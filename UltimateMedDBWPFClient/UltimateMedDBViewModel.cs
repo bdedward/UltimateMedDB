@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
+
 using UltimateMedDB.Business;
 
 namespace UltimateMedDB.WPFClient
 {
-    public class UltimateMedDBViewModel
+    public class UltimateMedDBViewModel : INotifyPropertyChanged
     {
+
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         public List<Patient> AllPatients
         {
@@ -27,7 +33,8 @@ namespace UltimateMedDB.WPFClient
             set
             {
                 _selectedPatient = value;
-                //RaisePropertyChanged();
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedPatient"));
+                //OnPropertyChanged("SelectedPatient");
             }
         }
 
@@ -44,8 +51,6 @@ namespace UltimateMedDB.WPFClient
             }
         }
 
-
-
         public List<Bill> AllBills
         {
             get
@@ -55,7 +60,7 @@ namespace UltimateMedDB.WPFClient
         }
 
         public List<Bill> BillsByPid
-        {
+        {            
             get
             {
                 return Bill.GetBillsByPid(SelectedPatient.Pid);
@@ -79,11 +84,24 @@ namespace UltimateMedDB.WPFClient
         {
             get
             {
-                return AllLabs.GetAllLabs();
+                return Lab.GetAllLabs();
             }
         }
 
+        public List<Lab> LabsByPatient
+        {
+            get
+            {
+                return Lab.LabsByPatient(SelectedPatient.Name);
+            }
+        }
 
+        // Create the OnPropertyChanged method to raise the event
+        // The calling member's name will be used as the parameter.
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
 
     }
 }

@@ -10,6 +10,20 @@
     <p>
     </p>
 
+    <asp:GridView ID="gvBillsbyPid" runat="server"></asp:GridView>
+    <asp:ObjectDataSource 
+        ID="odsBillByPid" 
+        runat="server" 
+        TypeName="UltimateMedDB.Business.Bill"
+        SelectMethod="GetBillsByPid">
+        <SelectParameters>
+        <asp:QueryStringParameter
+            Name="patient"
+            QueryStringField="patient"
+            Type="String" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
+
 
 
 </asp:Content>

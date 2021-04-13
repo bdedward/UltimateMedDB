@@ -19,7 +19,7 @@ namespace UltimateMedDBWPFClient
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window 
     {
         public MainWindow()
         {
@@ -52,41 +52,33 @@ namespace UltimateMedDBWPFClient
             MessageBox.Show("Patient Has Been Successfully Saved.");
         }
 
-
-
-        private void ProcessComboBoxes(ComboBox senderBox)
-        {
-            //ComboBox dependentBox = cboPatientBills;
-            //ComboBox independentBox = cboAllPatients;
-            //Patient cast = (Patient) independentBox.SelectedItem;
-            // dependentBox.ItemsSource = senderBox.SelectedItem;
-
-            //int pid = Convert.ToInt32(cast.Pid);
-            //dependentBox.Items.Clear();
-            //cboPatientBills.ItemsSource = independentBox.SelectedItem;
-            //dependentBox.IsEnabled = true;
-        }
-
-        private void cboAllPatients_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ProcessComboBoxes(sender as ComboBox);
-        }
-
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            DgPatientBills.Items.Refresh();
 
             DataGrid dependentGrid = DgPatientBills;
-            //dependentGrid.SelectedValue = cboAllPatients.SelectedValue;
-            //dependentGrid.SelectedItems.Clear();
             dependentGrid.Items.Refresh();
-            //dependentGrid.SelectedItems.Add(cboAllPatients.SelectedValue);
         }
 
+        //This Event is triggered when the user selects a specific patient.  The subsequent field "Patient's Bills"
+        //is then updated with Bills that are assigned to the Patient.
         private void CboAllPatients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-            DataGrid dependentGrid = DgPatientBills;
-            dependentGrid.Items.Refresh();
+            //Obtain the view model dataContext
+            UltimateMedDB.WPFClient.UltimateMedDBViewModel currentViewModel =
+                (UltimateMedDB.WPFClient.UltimateMedDBViewModel)DataContext;
+
+            //Get the new List<Bill> object from the current view model
+            var a = currentViewModel.BillsByPid;
+
+            //Assign the ItemsSource of the Patient's Bill DataGrid to the newly obtained object
+            DgPatientBills.ItemsSource = a;
+            DgPatientBills.Items.Refresh();
+        }
+
+        private void DataGrid_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+            DgPatientBills.Items.Refresh();
         }
     }
 }
