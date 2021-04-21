@@ -14,14 +14,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UltimateMedDB.Business;
 
-namespace UltimateMedDBWPFClient
+namespace UltimateMedDB.WPFClient
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window 
+    public partial class PatientBillingView : Window
     {
-        public MainWindow()
+        public PatientBillingView()
         {
             InitializeComponent();
         }
@@ -29,8 +29,8 @@ namespace UltimateMedDBWPFClient
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //Use implicit casting with caution
-            UltimateMedDB.WPFClient.UltimateMedDBViewModel currentViewModel =
-                (UltimateMedDB.WPFClient.UltimateMedDBViewModel)DataContext;
+            UltimateMedDB.WPFClient.PatientBillingViewModel currentViewModel =
+                (UltimateMedDB.WPFClient.PatientBillingViewModel)DataContext;
 
             UltimateMedDB.Business.Patient newPatient = currentViewModel.NewPatient;
 
@@ -65,8 +65,8 @@ namespace UltimateMedDBWPFClient
         private void CboAllPatients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Obtain the view model dataContext
-            UltimateMedDB.WPFClient.UltimateMedDBViewModel currentViewModel =
-                (UltimateMedDB.WPFClient.UltimateMedDBViewModel)DataContext;
+            UltimateMedDB.WPFClient.PatientBillingViewModel currentViewModel =
+                (UltimateMedDB.WPFClient.PatientBillingViewModel)DataContext;
 
             //Get the new List<Bill> object from the current view model
             var a = currentViewModel.BillsByPid;

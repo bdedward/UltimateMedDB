@@ -32,6 +32,10 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "UltimateMedDBWeb", "Ultimat
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C7F81B4D-9605-4986-96D9-8F3C15298103}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UMDBBusinessLayerTest", "Tests\UMDBBusinessLayerTest\UMDBBusinessLayerTest.csproj", "{21210B47-FC34-460D-9A1F-789B39531DD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,9 +58,16 @@ Global
 		{A0D6E68A-4084-456B-A6DF-225CB8AB7D4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0D6E68A-4084-456B-A6DF-225CB8AB7D4C}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{A0D6E68A-4084-456B-A6DF-225CB8AB7D4C}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{21210B47-FC34-460D-9A1F-789B39531DD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21210B47-FC34-460D-9A1F-789B39531DD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21210B47-FC34-460D-9A1F-789B39531DD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21210B47-FC34-460D-9A1F-789B39531DD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{21210B47-FC34-460D-9A1F-789B39531DD8} = {C7F81B4D-9605-4986-96D9-8F3C15298103}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8ABC7D78-9E5A-402D-994D-1B901BFFFD48}

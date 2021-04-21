@@ -11,7 +11,7 @@ using UltimateMedDB.Business;
 
 namespace UltimateMedDB.WPFClient
 {
-    public class UltimateMedDBViewModel : INotifyPropertyChanged
+    public class PatientBillingViewModel : INotifyPropertyChanged
     {
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
@@ -60,7 +60,7 @@ namespace UltimateMedDB.WPFClient
         }
 
         public List<Bill> BillsByPid
-        {            
+        {
             get
             {
                 return Bill.GetBillsByPid(SelectedPatient.Pid);

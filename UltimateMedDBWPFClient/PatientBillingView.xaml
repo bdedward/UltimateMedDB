@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UltimateMedDBWPFClient"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:WPFClient="clr-namespace:UltimateMedDB.WPFClient" x:Class="UltimateMedDBWPFClient.MainWindow"
+        xmlns:WPFClient="clr-namespace:UltimateMedDB.WPFClient" x:Class="UltimateMedDB.WPFClient.PatientBillingView"
         mc:Ignorable="d"
         Title="Ultimate Medical DB" Icon="Icon1.ico" Height="650" Width="800" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
-        <WPFClient:UltimateMedDBViewModel/>
+        <WPFClient:PatientBillingViewModel/>
     </Window.DataContext>
 
     <b:Interaction.Triggers>
@@ -46,29 +46,29 @@
             <Button Click="Button_Click" Width="125">Save New Patient</Button>
 
             <TextBox Text="Patient Lookup" FontSize="20"/>
-            
+
             <ComboBox Name="cboAllPatients"  SelectedItem ="{Binding SelectedPatient}" ItemsSource="{Binding AllPatients}" DisplayMemberPath="Name" Width="250" SelectionChanged="CboAllPatients_SelectionChanged" />
             <DataGrid  ItemsSource="{Binding SelectedPatient.Patients}" CanUserAddRows="True" SourceUpdated="DataGrid_SourceUpdated" />
 
 
-            
-            
+
+
             <TextBox Text="Patient's Bill(s)" FontSize="20" />
             <!--
             <ComboBox Name="cboPatientBills"  SelectedItem ="{Binding SelectedPatient}" ItemsSource="{Binding BillsByPid}" DisplayMemberPath="BillTotal" Width="150"/>
-            --> 
-            <DataGrid Name="DgPatientBills" ItemsSource="{Binding BillsByPid}" DataContext="" />                       
-            
+            -->
+            <DataGrid Name="DgPatientBills" ItemsSource="{Binding BillsByPid}" DataContext="" />
+
 
             <TextBox Text="Bill Patient" FontSize="20" />
             <TextBox Text="Get Patient Labs" FontSize="20" />
             <ComboBox Name="cboPatientLabs" SelectedItem ="{Binding SelectedPatient}" ItemsSource="{Binding PatientLabs}" DisplayMemberPath="Amount" Width="100"/>
             <DataGrid ItemsSource="{Binding PatientLabs}" CanUserAddRows="True" />
-            
-            
+
+
             <TextBox Text="New Lab for Patient" FontSize="20" />
-            <WrapPanel></WrapPanel> 
+            <WrapPanel></WrapPanel>
 
         </StackPanel>
     </Grid>
-</Window>
+    </Window>
