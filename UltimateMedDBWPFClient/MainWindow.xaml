@@ -1,0 +1,47 @@
+﻿<Window x:Class="UltimateMedDBWPFClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UltimateMedDBWPFClient"
+        xmlns:billing="clr-namespace:UltimateMedDBWPFClient.Billing"
+        mc:Ignorable="d"
+        Title="Ultimate Med DB" Height="450" Width="800">
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type billing:PatientBillingViewModel}">
+            <billing:PatientBillingView />
+        </DataTemplate>
+    </Window.Resources>
+    
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+    
+    <TextBlock>
+        Welcome to Ultimate Med Database.  Your one-stop Medical System.  
+        <LineBreak>
+            
+        </LineBreak>
+        
+    </TextBlock>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid x:Name="NavBar">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <Button Content="Billing"
+                    Command="{Binding NavCommand}"
+                    CommandParameter="billing"
+                    Grid.Column="2" />
+        </Grid>
+        <ContentControl Content="{Binding CurrentViewModel}"/>
+    </Grid>
+</Window>

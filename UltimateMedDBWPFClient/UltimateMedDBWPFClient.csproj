@@ -73,8 +73,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="PatientBillingViewModel.cs" />
-    <Page Include="PatientBillingView.xaml">
+    <Compile Include="Billing\PatientBillingViewModel.cs" />
+    <Compile Include="BindableBase.cs" />
+    <Compile Include="RelayCommand.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Billing\PatientBillingView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -82,12 +87,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PatientBillingView.xaml.cs">
+    <Compile Include="Billing\PatientBillingView.xaml.cs">
       <DependentUpon>PatientBillingView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -122,6 +132,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Labs\" />
+    <Folder Include="Patients\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

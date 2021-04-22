@@ -39,5 +39,34 @@ namespace UMDBBusinessLayerTest
             Assert.AreEqual(expectedAddress, actualAddress);
         }
 
+        [TestMethod]
+        public void GetAllPatientsTest()
+        {
+
+        }
+
+
+
+        [TestMethod]
+        public void StaticInstanceCountTest()
+        {
+            // -- Arrange
+            var p1 = new Patient();
+            p1.Name = "Bob";
+            Patient.InstanceCount += 1;
+
+            var p2 = new Patient();
+            p2.Name = "Susan";
+            Patient.InstanceCount += 1;
+
+            var p3 = new Patient();
+            p3.Name = "Bill";
+            Patient.InstanceCount += 1;
+
+            // -- Act
+
+            // -- Assert
+            Assert.AreEqual(3, Patient.InstanceCount);
+        }
     }
 }

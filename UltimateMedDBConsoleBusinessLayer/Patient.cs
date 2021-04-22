@@ -45,7 +45,7 @@ namespace UltimateMedDB.Business
                 currentPatient.Disease = patientRow.Disease;
                 currentPatient.Doc_Id = patientRow.Doc_Id;
                 currentPatient.AddPatient(currentPatient);
-                allPatients.Add(currentPatient);
+                allPatients.Add(currentPatient);                
             }
             return allPatients;
         }
@@ -53,7 +53,10 @@ namespace UltimateMedDB.Business
         public void AddPatient(Patient patient)
         {
             Patients.Add(patient);
+            InstanceCount += 1;
         }
+
+        public static int InstanceCount { get; set; }
 
         public List<Patient> Patients { get; set; }
 
