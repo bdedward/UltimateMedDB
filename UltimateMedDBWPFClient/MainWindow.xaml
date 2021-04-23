@@ -5,43 +5,75 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UltimateMedDBWPFClient"
         xmlns:billing="clr-namespace:UltimateMedDBWPFClient.Billing"
+        xmlns:labs="clr-namespace:UltimateMedDBWPFClient.Labs"
+        xmlns:patients="clr-namespace:UltimateMedDBWPFClient.Patients"
         mc:Ignorable="d"
-        Title="Ultimate Med DB" Height="450" Width="800">
+        Title="Ultimate Med DB" Height="650" Width="900">
 
     <Window.Resources>
         <DataTemplate DataType="{x:Type billing:PatientBillingViewModel}">
             <billing:PatientBillingView />
         </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type labs:LabViewModel}">
+            <labs:LabView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type patients:PatientViewModel}">
+            <patients:PatientView />
+        </DataTemplate>
+
     </Window.Resources>
-    
+
     <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
-    
-    <TextBlock>
-        Welcome to Ultimate Med Database.  Your one-stop Medical System.  
-        <LineBreak>
-            
-        </LineBreak>
+
+    <ScrollViewer>
+
+    <Grid ShowGridLines="True">
         
-    </TextBlock>
-    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" MinHeight="64" />
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <Grid x:Name="NavBar">
+        <Grid x:Name="NavBar" Height="48" Margin="0,0,-0.4,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0.6,0">
+                Welcome to Ultimate Med Database, a one-stop Medical Records System.  
+                <LineBreak>
+                </LineBreak>
+                We currently support: Adding New Patients, View Patients Billing information, Viewing Labs
+                <LineBreak>
+                </LineBreak>
+            </TextBlock>
+
             <Button Content="Billing"
                     Command="{Binding NavCommand}"
-                    CommandParameter="billing"
-                    Grid.Column="2" />
+                    CommandParameter="billing" Margin="0,33,165.4,-15"
+                    />
+
+            <Button Content="Patient Labs"
+                    Command="{Binding NavCommand}"
+                    CommandParameter="labs" Margin="146,33,20.4,-15"
+                    />
+
+
         </Grid>
-        <ContentControl Content="{Binding CurrentViewModel}"/>
+        <ContentControl Content="{Binding CurrentViewModel}" RenderTransformOrigin="0.5,0.5" Margin="0,49,-0.4,-96" Grid.Row="1">
+            <ContentControl.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="-0.374"/>
+                    <RotateTransform Angle="0.63"/>
+                    <TranslateTransform X="-0.032" Y="2.918"/>
+                </TransformGroup>
+            </ContentControl.RenderTransform>
+        </ContentControl>
     </Grid>
+    </ScrollViewer>
 </Window>

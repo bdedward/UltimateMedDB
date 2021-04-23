@@ -75,6 +75,14 @@
     </ApplicationDefinition>
     <Compile Include="Billing\PatientBillingViewModel.cs" />
     <Compile Include="BindableBase.cs" />
+    <Compile Include="Labs\LabView.xaml.cs">
+      <DependentUpon>LabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Labs\LabViewModel.cs" />
+    <Compile Include="Patients\PatientView.xaml.cs">
+      <DependentUpon>PatientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Patients\PatientViewModel.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -91,7 +99,15 @@
       <DependentUpon>PatientBillingView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Labs\LabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Patients\PatientView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -133,9 +149,6 @@
   <ItemGroup>
     <Resource Include="Icon1.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Labs\" />
-    <Folder Include="Patients\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

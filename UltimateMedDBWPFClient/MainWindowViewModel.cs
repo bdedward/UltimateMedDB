@@ -3,13 +3,14 @@ using System.Linq;
 using UltimateMedDB.Business;
 using UltimateMedDBWPFClient;
 using UltimateMedDBWPFClient.Billing;
+using UltimateMedDBWPFClient.Labs;
 
 namespace UltimateMedDBWPFClient
 {
     class MainWindowViewModel : BindableBase
     {
         private PatientBillingViewModel _billingViewModel = new PatientBillingViewModel();
-        //private OrderViewModel _orderViewModel = new OrderViewModel();
+        private LabViewModel _labViewModel = new LabViewModel();
         //private OrderPrepViewModel _orderPrepViewModel = new OrderPrepViewModel();
         //private AddEditCustomerViewModel _addEditViewModel = new AddEditCustomerViewModel();
 
@@ -41,9 +42,9 @@ namespace UltimateMedDBWPFClient
                 case "billing":
                     CurrentViewModel = _billingViewModel;
                     break;
-                case "customers":
+                case "labs":
                 default:
-                    //CurrentViewModel = _customerListViewModel;
+                    CurrentViewModel = _labViewModel;
                     break;
             }
         }

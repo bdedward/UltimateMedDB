@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="UltimateMedDBWPFClient.Patients.PatientView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UltimateMedDBWPFClient.Patients"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel >
+            <TextBox Text="Add a New Patient" FontSize="20" />
+            <WrapPanel>
+                <Label>Name</Label>
+                <TextBox Name="NewPatientName" Width="140" Text="{Binding NewPatient.Name}" />
+                <Label>Gender</Label>
+                <TextBox Name="NewPatientGender" Width="80" Text="{Binding NewPatient.Gender}" />
+                <Label>Age</Label>
+                <TextBox Name="NewPatientAge" Width="30" Text="{Binding NewPatient.Age}" />
+                <Label>Phone</Label>
+                <TextBox Name="NewPatientPhone" Width="140" Text="{Binding NewPatient.Phone}" />
+                <Label>Weight</Label>
+                <TextBox Name="NewPatientWeight" Width="30" Text="{Binding NewPatient.Weight}" />
+
+            </WrapPanel>
+            <WrapPanel>
+                <Label>Address</Label>
+                <TextBox Name ="NewPatientAddress" Width="190" Text="{Binding NewPatient.Address}" />
+                <Label>Doc_Id</Label>
+                <TextBox Name ="NewPatientDocId" Width="48" Text="{Binding NewPatient.Doc_Id}" />
+                <Label>Disease</Label>
+                <TextBox Name="NewPatientDisease" Width="85" Text="{Binding NewPatient.Disease}" />
+            </WrapPanel>
+            <Button Click="Button_Click" Width="125">Save New Patient</Button>
+
+            <TextBox Text="Patient Lookup" FontSize="20"/>
+
+            <ComboBox Name="cboAllPatients"  SelectedItem ="{Binding SelectedPatient}" ItemsSource="{Binding AllPatients}" DisplayMemberPath="Name" Width="250" SelectionChanged="CboAllPatients_SelectionChanged" />
+            <DataGrid  ItemsSource="{Binding SelectedPatient.Patients}" CanUserAddRows="True" SourceUpdated="DataGrid_SourceUpdated" />
+        </StackPanel>
+    </Grid>
+</UserControl>
