@@ -18,7 +18,8 @@ namespace UltimateMedDB.Business
                         string Phone, string Disease, string Doctor)
         {
             PatientTableAdapter taPatient = new PatientTableAdapter();
-            taPatient.AddNewPatient(Name, Gender, Age, Weight, Address, Phone, Disease, Doctor);
+            if(Name != null)
+                taPatient.AddNewPatient(Name, Gender, Age, Weight, Address, Phone, Disease, Doctor);
         }
 
 

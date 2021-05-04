@@ -4,6 +4,7 @@ using UltimateMedDB.Business;
 using UltimateMedDBWPFClient;
 using UltimateMedDBWPFClient.Billing;
 using UltimateMedDBWPFClient.Labs;
+using UltimateMedDBWPFClient.Patients;
 
 namespace UltimateMedDBWPFClient
 {
@@ -11,6 +12,7 @@ namespace UltimateMedDBWPFClient
     {
         private PatientBillingViewModel _billingViewModel = new PatientBillingViewModel();
         private LabViewModel _labViewModel = new LabViewModel();
+        private PatientViewModel _patientViewModel = new PatientViewModel();
         //private OrderPrepViewModel _orderPrepViewModel = new OrderPrepViewModel();
         //private AddEditCustomerViewModel _addEditViewModel = new AddEditCustomerViewModel();
 
@@ -43,8 +45,10 @@ namespace UltimateMedDBWPFClient
                     CurrentViewModel = _billingViewModel;
                     break;
                 case "labs":
-                default:
                     CurrentViewModel = _labViewModel;
+                    break;
+                case "patients":
+                    CurrentViewModel = _patientViewModel;
                     break;
             }
         }

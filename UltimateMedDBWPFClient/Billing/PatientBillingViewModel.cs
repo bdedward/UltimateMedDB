@@ -77,21 +77,7 @@ namespace UltimateMedDBWPFClient.Billing
             }
         }
 
-        public List<Lab> PatientLabs
-        {
-            get
-            {
-                return Lab.GetAllLabs();
-            }
-        }
 
-        public List<Lab> LabsByPatient
-        {
-            get
-            {
-                return Lab.LabsByPatient(SelectedPatient.Name);
-            }
-        }
 
     }
 }

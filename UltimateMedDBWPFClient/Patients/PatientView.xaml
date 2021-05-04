@@ -35,7 +35,30 @@
             <TextBox Text="Patient Lookup" FontSize="20"/>
 
             <ComboBox Name="cboAllPatients"  SelectedItem ="{Binding SelectedPatient}" ItemsSource="{Binding AllPatients}" DisplayMemberPath="Name" Width="250" SelectionChanged="CboAllPatients_SelectionChanged" />
-            <DataGrid  ItemsSource="{Binding SelectedPatient.Patients}" CanUserAddRows="True" SourceUpdated="DataGrid_SourceUpdated" />
+
+            <DataGrid Name="dgCurrentPatient" ItemsSource="{Binding SelectedPatient}" SourceUpdated="DataGrid_SourceUpdated" DataContext=""/>
+
+            <WrapPanel>
+                <Label>Name</Label>
+                <TextBox Name="PatientName" Width="140" Text="{Binding SelectedPatient.Name}" />
+                <Label>Gender</Label>
+                <TextBox Name="PatientGender" Width="80" Text="{Binding SelectedPatient.Gender}" />
+                <Label>Age</Label>
+                <TextBox Name="PatientAge" Width="30" Text="{Binding SelectedPatient.Age}" />
+                <Label>Phone</Label>
+                <TextBox Name="PatientPhone" Width="140" Text="{Binding SelectedPatient.Phone}" />
+                <Label>Weight</Label>
+                <TextBox Name="PatientWeight" Width="30" Text="{Binding SelectedPatient.Weight}" />
+            </WrapPanel>
+            <WrapPanel>
+                <Label>Address</Label>
+                <TextBox Name ="PatientAddress" Width="190" Text="{Binding SelectedPatient.Address}" />
+                <Label>Doc_Id</Label>
+                <TextBox Name ="PatientDocId" Width="48" Text="{Binding SelectedPatient.Doc_Id}" />
+                <Label>Disease</Label>
+                <TextBox Name="PatientDisease" Width="85" Text="{Binding SelectedPatient.Disease}" />
+            </WrapPanel>
+
         </StackPanel>
     </Grid>
 </UserControl>

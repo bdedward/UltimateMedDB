@@ -14,7 +14,7 @@
         <DataTemplate DataType="{x:Type billing:PatientBillingViewModel}">
             <billing:PatientBillingView />
         </DataTemplate>
-        
+
         <DataTemplate DataType="{x:Type labs:LabViewModel}">
             <labs:LabView />
         </DataTemplate>
@@ -31,49 +31,49 @@
 
     <ScrollViewer>
 
-    <Grid ShowGridLines="True">
-        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" MinHeight="64" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid x:Name="NavBar" Height="48" Margin="0,0,-0.4,0" VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0.6,0">
-                Welcome to Ultimate Med Database, a one-stop Medical Records System.  
-                <LineBreak>
-                </LineBreak>
-                We currently support: Adding New Patients, View Patients Billing information, Viewing Labs
-                <LineBreak>
-                </LineBreak>
-            </TextBlock>
+        <Grid>
 
-            <Button Content="Billing"
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="64" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid x:Name="NavBar" Height="48" Margin="0,0,-0.4,0" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0.6,0">
+                Welcome to Ultimate Med Database, a one-stop Medical Records System.
+                </TextBlock>
+
+                <Button Content="Billing"
                     Command="{Binding NavCommand}"
                     CommandParameter="billing" Margin="0,33,165.4,-15"
                     />
 
-            <Button Content="Patient Labs"
+                <Button Content="Patient Labs"
                     Command="{Binding NavCommand}"
                     CommandParameter="labs" Margin="146,33,20.4,-15"
                     />
 
+                <Button Content="Patient Portal"
+                    Command="{Binding NavCommand}"
+                    CommandParameter="patients" Grid.Column="1" Margin="0.2,33,159.8,-15" 
+                    />
 
+
+            </Grid>
+            <ContentControl Content="{Binding CurrentViewModel}" RenderTransformOrigin="0.5,0.5" Margin="-1,1,0.8,-48" Grid.Row="1">
+                <ContentControl.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="-0.374"/>
+                        <RotateTransform Angle="0.63"/>
+                        <TranslateTransform X="-0.032" Y="2.918"/>
+                    </TransformGroup>
+                </ContentControl.RenderTransform>
+            </ContentControl>
         </Grid>
-        <ContentControl Content="{Binding CurrentViewModel}" RenderTransformOrigin="0.5,0.5" Margin="0,49,-0.4,-96" Grid.Row="1">
-            <ContentControl.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="-0.374"/>
-                    <RotateTransform Angle="0.63"/>
-                    <TranslateTransform X="-0.032" Y="2.918"/>
-                </TransformGroup>
-            </ContentControl.RenderTransform>
-        </ContentControl>
-    </Grid>
     </ScrollViewer>
 </Window>

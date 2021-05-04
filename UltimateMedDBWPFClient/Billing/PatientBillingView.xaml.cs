@@ -26,32 +26,7 @@ namespace UltimateMedDBWPFClient.Billing
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //Use implicit casting with caution
-            UltimateMedDBWPFClient.Billing.PatientBillingViewModel currentViewModel =
-                (UltimateMedDBWPFClient.Billing.PatientBillingViewModel)DataContext;
-
-            UltimateMedDB.Business.Patient newPatient = currentViewModel.NewPatient;
-
-            currentViewModel.NewPatient.SaveNewPatient(newPatient.Name, newPatient.Gender, newPatient.Age,
-                newPatient.Weight, newPatient.Address, newPatient.Phone, newPatient.Disease, newPatient.Doc_Id);
-
-            BindingOperations.GetBindingExpressionBase(cboAllPatients, ComboBox.ItemsSourceProperty).UpdateTarget();
-
-            //Clear fields once New Patient has been saved
-            NewPatientAddress.Text = String.Empty;
-            NewPatientWeight.Text = String.Empty;
-            NewPatientName.Text = String.Empty;
-            NewPatientAge.Text = String.Empty;
-            NewPatientDocId.Text = String.Empty;
-            NewPatientDisease.Text = String.Empty;
-            NewPatientGender.Text = String.Empty;
-            NewPatientPhone.Text = String.Empty;
-
-            MessageBox.Show("Patient Has Been Successfully Saved.");
-        }
-
+       
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DgPatientBills.Items.Refresh();
@@ -68,17 +43,21 @@ namespace UltimateMedDBWPFClient.Billing
             UltimateMedDBWPFClient.Billing.PatientBillingViewModel currentViewModel =
                 (UltimateMedDBWPFClient.Billing.PatientBillingViewModel)DataContext;
 
-            //Get the new List<Bill> object from the current view model
-            var a = currentViewModel.BillsByPid;
+            if (currentViewModel != null)
+            {
+                //Get the new List<Bill> object from the current view model
+                var a = currentViewModel.BillsByPid;
 
-            //Assign the ItemsSource of the Patient's Bill DataGrid to the newly obtained object
-            DgPatientBills.ItemsSource = a;
-            DgPatientBills.Items.Refresh();
+                //Assign the ItemsSource of the Patient's Bill DataGrid to the newly obtained object
+                DgPatientBills.ItemsSource = a;
+                DgPatientBills.Items.Refresh();
+            }
         }
-
+        /*
         private void DataGrid_SourceUpdated(object sender, DataTransferEventArgs e)
         {
             DgPatientBills.Items.Refresh();
         }
+        */
     }
 }
