@@ -46,7 +46,9 @@ namespace UltimateMedDBWPFClient.Labs
         {
             get
             {
-                return Lab.LabsByPatient(SelectedPatient.Name);
+                if(SelectedPatient.Name != null)
+                    return Lab.LabsByPatient(SelectedPatient.Name);
+                return null;
             }
         }
     }

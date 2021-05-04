@@ -51,8 +51,19 @@ namespace UltimateMedDBWPFClient.Billing
                 //Assign the ItemsSource of the Patient's Bill DataGrid to the newly obtained object
                 DgPatientBills.ItemsSource = a;
                 DgPatientBills.Items.Refresh();
+
+                UltimateMedDB.Business.Patient selectedPatient = currentViewModel.SelectedPatient;
+                PatientName.Text = selectedPatient.Name;
+                PatientAge.Text = (selectedPatient.Age).ToString();
+                PatientGender.Text = selectedPatient.Gender;
+                PatientPhone.Text = selectedPatient.Phone;
+                PatientWeight.Text = (selectedPatient.Weight).ToString();
+                PatientAddress.Text = selectedPatient.Address;
+                PatientDocId.Text = selectedPatient.Doc_Id;
+                PatientDisease.Text = selectedPatient.Disease;
             }
         }
+
         /*
         private void DataGrid_SourceUpdated(object sender, DataTransferEventArgs e)
         {

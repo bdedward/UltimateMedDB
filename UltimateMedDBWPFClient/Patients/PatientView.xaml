@@ -36,7 +36,7 @@
 
             <ComboBox Name="cboAllPatients"  SelectedItem ="{Binding SelectedPatient}" ItemsSource="{Binding AllPatients}" DisplayMemberPath="Name" Width="250" SelectionChanged="CboAllPatients_SelectionChanged" />
 
-            <DataGrid Name="dgCurrentPatient" ItemsSource="{Binding SelectedPatient}" SourceUpdated="DataGrid_SourceUpdated" DataContext=""/>
+            <DataGrid Name="dgCurrentPatient" ItemsSource="{Binding SelectedPatient}" DataContext=""/>
 
             <WrapPanel>
                 <Label>Name</Label>
