@@ -49,7 +49,27 @@
             
             
             <TextBox Text="Bill Patient" FontSize="20" />
-         
+            <WrapPanel>
+                <Label>Patient Type</Label>
+                <TextBox Name="BillPatientType" Width="80" Text="" />
+                <Label>Doctor Charge</Label>
+                <TextBox Name="BillDoctorCharge" Width="80" Text="" />
+                <Label>Lab Charge</Label>
+                <TextBox Name="BillLabCharge" Width="80" Text="" />
+                <Label>Operation Charge</Label>
+                <TextBox Name="BillOperationCharge" Width="80" Text="" />
+                <Label>Room Charge</Label>
+                <TextBox Name="BillRoomCharge" Width="80" Text="" />
+                <Label>Medicine Charge</Label>
+                <TextBox Name="BillMedicineCharge" Width="80" Text="" />
+                <Label>Nursing Charge</Label>
+                <TextBox Name="BillNursingCharge" Width="80" Text="" />
+                <Label>Insurance Charge</Label>
+                <TextBox Name="BillInsuranceCharge" Width="80" Text="" />
+                <Label>Insurance Carrier</Label>
+                <TextBox Name="BillInsuranceCarrier" Width="80" Text="" />
+            </WrapPanel>
+            <Button Click="Button_Click" Width="125">Add Bill to Patient</Button>
 
         </StackPanel>
     </Grid>

@@ -48,6 +48,19 @@ namespace UltimateMedDBWPFClient.Billing
             }
         }
 
+        private Bill _newBill = new Bill();
+        public Bill NewBill
+        {
+            get
+            {
+                return _newBill;
+            }
+            set
+            {
+                _newBill = value;
+            }
+        }
+
         public List<Bill> AllBills
         {
             get

@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-//using UltimateMedDB.Business;
+using UltimateMedDB.Business;
 
 namespace UltimateMedDBWPFClient.Billing
 {
@@ -64,6 +64,40 @@ namespace UltimateMedDBWPFClient.Billing
             }
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //When user clicks this button we want to save to the currently selected patient
+            //The lab information populated in the Text Boxes
+            UltimateMedDBWPFClient.Billing.PatientBillingViewModel currentViewModel =
+                (UltimateMedDBWPFClient.Billing.PatientBillingViewModel)DataContext;
+
+
+            if (currentViewModel.NewBill != null && currentViewModel.SelectedPatient != null)
+            {
+                Patient patient = currentViewModel.SelectedPatient;
+                Bill newBill = currentViewModel.NewBill;
+                newBill.DoctorCharge = Decimal.Parse(BillDoctorCharge.Text);
+                newBill.InsuranceCarrier = BillInsuranceCarrier.Text;
+                newBill.LabCharge = Decimal.Parse(BillLabCharge.Text);
+                newBill.NursingCharge = Decimal.Parse(BillNursingCharge.Text);
+                newBill.OperationCharge = Decimal.Parse(BillOperationCharge.Text);
+                newBill.RoomCharge = Decimal.Parse(BillRoomCharge.Text);
+                newBill.MedicineCharge = Decimal.Parse(BillMedicineCharge.Text);
+                newBill.PatientType = BillPatientType.Text;
+                newBill.BillTotal = newBill.DoctorCharge + newBill.LabCharge + newBill.NursingCharge + newBill.OperationCharge
+                    + newBill.RoomCharge + newBill.MedicineCharge;
+                Bill.AssignNewBill(newBill, patient.Name);
+                MessageBox.Show("Bill has been successfully added to Patient's Account");
+                BillDoctorCharge.Text = null;
+                BillInsuranceCarrier.Text = null;
+                BillLabCharge.Text = null;
+                BillNursingCharge.Text = null;
+                BillOperationCharge.Text = null;
+                BillRoomCharge.Text = null;
+                BillMedicineCharge.Text = null;
+                BillPatientType.Text = null;
+            }
+        }
         /*
         private void DataGrid_SourceUpdated(object sender, DataTransferEventArgs e)
         {

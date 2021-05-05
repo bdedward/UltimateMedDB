@@ -38,10 +38,10 @@ namespace UltimateMedDB.Business
             return PatientBills;
         }
 
-        public void AssignNewBill(Bill newBill, string Name)
+        public static void AssignNewBill(Bill newBill, string Name)
         {
             PatientTableAdapter taBill = new PatientTableAdapter();
-            int pid = (int)taBill.GetPatientID("John Smith");
+            int pid = (int)taBill.GetPatientID(Name);
             BillTableAdapter taNewBill = new BillTableAdapter();
             //Returns the Bill_id so that we may assign it in the Patient_Bill Connector Table.
             var ScopeID = taNewBill.AddBillReturnScopeID(newBill.PatientType, newBill.MedicineCharge, newBill.DoctorCharge,
@@ -51,7 +51,7 @@ namespace UltimateMedDB.Business
             taNewBill.InsertBillByPidScopeID(pid, Convert.ToInt32(ScopeID));
 
             //Add Bill to our Bills list
-            Bills.Add(newBill);
+            //Bills.Add(newBill);
         }
 
         public static List<Bill> GetAllBillingRecords()
@@ -62,15 +62,17 @@ namespace UltimateMedDB.Business
 
             foreach (dsUltimateMedDB.BillRow billingRow in dtBilling.Rows)
             {
-                Bill currentBill = new Bill();
-                currentBill.PatientType = billingRow.PatientType;
-                currentBill.DoctorCharge = billingRow.DoctorCharge;
-                currentBill.LabCharge = billingRow.LabCharge;
-                currentBill.OperationCharge = billingRow.OperationCharge;
-                currentBill.RoomCharge = billingRow.RoomCharge;
-                currentBill.MedicineCharge = billingRow.MedicineCharge;
-                currentBill.NursingCharge = billingRow.NursingCharge;
-                currentBill.InsuranceCarrier = billingRow.InsuranceCarrier;
+                Bill currentBill = new Bill
+                {
+                    PatientType = billingRow.PatientType,
+                    DoctorCharge = billingRow.DoctorCharge,
+                    LabCharge = billingRow.LabCharge,
+                    OperationCharge = billingRow.OperationCharge,
+                    RoomCharge = billingRow.RoomCharge,
+                    MedicineCharge = billingRow.MedicineCharge,
+                    NursingCharge = billingRow.NursingCharge,
+                    InsuranceCarrier = billingRow.InsuranceCarrier
+                };
                 decimal total = currentBill.DoctorCharge + currentBill.LabCharge + currentBill.OperationCharge + currentBill.NursingCharge 
                                 + currentBill.MedicineCharge + currentBill.RoomCharge;
                 currentBill.BillTotal = total;
