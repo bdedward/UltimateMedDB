@@ -47,7 +47,7 @@ namespace UltimateMedDB.Business
         Query is then executed to insert new lab and return the Scope_ID of the new lab
         The Patient is then associated with the new Lab using connector table Patient_Lab
         */
-        public void AddLab(Lab newLab, string Name)
+        public static void AddLab(Lab newLab, string Name)
         {
             LabTableAdapter taLabs = new LabTableAdapter();
             PatientTableAdapter patientLookUp = new PatientTableAdapter();
@@ -55,7 +55,6 @@ namespace UltimateMedDB.Business
             int scope_id = Convert.ToInt32(taLabs.AddNewLabReturnScopeID(newLab.Weight, newLab.Doc_id, newLab.Date, newLab.Category, newLab.PatientType, newLab.Amount));
             Patient_LabTableAdapter labPatientConnect = new Patient_LabTableAdapter();
             labPatientConnect.InsertByPidLabID(pid, scope_id);
-            Labs.Add(newLab);
         }
 
         public static List<Lab> LabsByPatient(string Name)

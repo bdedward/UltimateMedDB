@@ -29,8 +29,6 @@ namespace UltimateMedDBWPFClient.Labs
             set
             {
                 _selectedPatient = value;
-                //PropertyChanged(this, new PropertyChangedEventArgs("SelectedPatient"));
-                //OnPropertyChanged("SelectedPatient");
             }
         }
 
@@ -46,10 +44,25 @@ namespace UltimateMedDBWPFClient.Labs
         {
             get
             {
-                if(SelectedPatient.Name != null)
+                if (SelectedPatient.Name != null)
                     return Lab.LabsByPatient(SelectedPatient.Name);
                 return null;
             }
         }
+
+        private Lab _newLab = new Lab();
+        public Lab NewLab
+        {
+            get
+            {
+                return _newLab;
+            }
+            set
+            {
+                _newLab = value;
+            }
+
+        }
+
     }
 }

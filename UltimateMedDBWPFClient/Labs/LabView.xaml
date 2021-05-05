@@ -49,7 +49,21 @@
             <DataGrid Name="DgLabs" ItemsSource="{Binding LabsByPatient}" CanUserAddRows="True" />
 
             <TextBox Text="New Lab for Patient" FontSize="20" />
-
+            <WrapPanel>
+                <Label>Amount</Label>
+                <TextBox Name="LabAmount" Width="80" Text="{Binding newLab.Amount}" />
+                <Label>Category</Label>
+                <TextBox Name="LabCategory" Width="80" Text="{Binding newLab.Category}" />
+                <Label>Date</Label>
+                <TextBox Name="LabDate" Width="80" Text="{Binding newLab.Date}" />
+                <Label>Doc_Id</Label>
+                <TextBox Name="LabDocId" Width="80" Text="{Binding newLab.Doc_id}" />
+                <Label>Weight</Label>
+                <TextBox Name="LabWeight" Width="80" Text="{Binding newLab.Weight}" />
+                <Label>PatientType</Label>
+                <TextBox Name="LabPatientType" Width="80" Text="{Binding newLab.PatientType}" />
+            </WrapPanel>
+            <Button Click="Button_Click" Width="125"> Add Bill to Patient</Button>
 
         </StackPanel>
     </Grid>

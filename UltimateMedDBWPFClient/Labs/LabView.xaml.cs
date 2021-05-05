@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UltimateMedDB.Business;
 
 namespace UltimateMedDBWPFClient.Labs
 {
@@ -51,5 +52,33 @@ namespace UltimateMedDBWPFClient.Labs
             }
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //When user clicks this button we want to save to the currently selected patient
+            //The lab information populated in the Text Boxes
+            UltimateMedDBWPFClient.Labs.LabViewModel currentViewModel =
+                (UltimateMedDBWPFClient.Labs.LabViewModel)DataContext;
+
+
+            if (currentViewModel.NewLab != null && currentViewModel.SelectedPatient != null)
+            {
+                currentViewModel.NewLab.Amount = Decimal.Parse(LabAmount.Text);
+                currentViewModel.NewLab.Category = LabCategory.Text;
+                currentViewModel.NewLab.Date = DateTime.Parse(LabDate.Text);
+                currentViewModel.NewLab.PatientType = LabPatientType.Text;
+                currentViewModel.NewLab.Weight = int.Parse(LabWeight.Text);
+                currentViewModel.NewLab.Doc_id = int.Parse(LabDocId.Text);
+
+                Lab.AddLab(currentViewModel.NewLab, currentViewModel.SelectedPatient.Name);
+                MessageBox.Show("Lab has been successfully added to Patient's Account");
+                LabAmount.Text = null;
+                LabCategory.Text = null;
+                LabDate.Text = null;
+                LabPatientType.Text = null;
+                LabWeight.Text = null;
+                LabDocId.Text = null;
+
+            }
+        }
     }
 }
