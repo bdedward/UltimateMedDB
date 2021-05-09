@@ -92,7 +92,22 @@ namespace UltimateMedDBConsole
             //List<Bill> allBills = Bill.GetAllBillingRecords();
             //List<Patient> allpatients = Patient.GetAllPatients();
 
-            var Labs = Lab.LabsByPatient("John Smith");
+            /*
+            Console.WriteLine("Test add new room");
+            Room newRoom = new Room();
+            newRoom.Number = 302;
+            newRoom.Status = "available";
+            newRoom.Type = "Intensive Care";
+            Room.AddNewRoom(newRoom);
+
+            Console.WriteLine("After adding new room, testing the dataset extraction");
+            List<Room> rooms = Room.GetAvailableRooms();
+            Console.WriteLine("Available Rooms: ");
+          
+            foreach (Room room in rooms)          
+                Console.WriteLine(room.Number);
+        */
+            Room.AssignRoom(301, "John Smith");
 
             Console.WriteLine("Goodbye");
             Console.ReadKey();

@@ -26,12 +26,11 @@ namespace UltimateMedDB.Business
         public static List<Patient> GetAllPatients()
         {
             PatientTableAdapter taPatient = new PatientTableAdapter();
-            PatientTableAdapter taPatients = new PatientTableAdapter();
-            var dtMenu = taPatient.GetData();
-            List<Patient> allPatients = new List<Patient>();
-            
+            //PatientTableAdapter taPatients = new PatientTableAdapter();
+            var dtPatient = taPatient.GetData();
+            List<Patient> allPatients = new List<Patient>();           
 
-            foreach (dsUltimateMedDB.PatientRow patientRow in dtMenu.Rows)
+            foreach (dsUltimateMedDB.PatientRow patientRow in dtPatient.Rows)
             {
                 Patient currentPatient = new Patient();
                 currentPatient.Pid = patientRow.Id;

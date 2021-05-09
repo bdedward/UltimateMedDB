@@ -50,7 +50,6 @@
   <ItemGroup>
     <Compile Include="Bill.cs" />
     <Compile Include="Doctor.cs" />
-    <Compile Include="DoctorList.cs" />
     <Compile Include="dsUltimateMedDB.cs">
       <DependentUpon>dsUltimateMedDB.xsd</DependentUpon>
     </Compile>
@@ -68,7 +67,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Room.cs" />
-    <Compile Include="Rooms.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

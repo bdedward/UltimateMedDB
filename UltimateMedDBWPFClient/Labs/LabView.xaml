@@ -51,17 +51,17 @@
             <TextBox Text="New Lab for Patient" FontSize="20" />
             <WrapPanel>
                 <Label>Amount</Label>
-                <TextBox Name="LabAmount" Width="80" Text="{Binding newLab.Amount}" />
+                <TextBox Name="LabAmount" Width="80" Text="" />
                 <Label>Category</Label>
-                <TextBox Name="LabCategory" Width="80" Text="{Binding newLab.Category}" />
+                <TextBox Name="LabCategory" Width="80" Text="" />
                 <Label>Date</Label>
-                <TextBox Name="LabDate" Width="80" Text="{Binding newLab.Date}" />
+                <TextBox Name="LabDate" Width="80" Text="" />
                 <Label>Doc_Id</Label>
-                <TextBox Name="LabDocId" Width="80" Text="{Binding newLab.Doc_id}" />
+                <TextBox Name="LabDocId" Width="80" Text="" />
                 <Label>Weight</Label>
-                <TextBox Name="LabWeight" Width="80" Text="{Binding newLab.Weight}" />
+                <TextBox Name="LabWeight" Width="80" Text="" />
                 <Label>PatientType</Label>
-                <TextBox Name="LabPatientType" Width="80" Text="{Binding newLab.PatientType}" />
+                <TextBox Name="LabPatientType" Width="80" Text="" />
             </WrapPanel>
             <Button Click="Button_Click" Width="125"> Add Bill to Patient</Button>
 

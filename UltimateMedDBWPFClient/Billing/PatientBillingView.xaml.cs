@@ -98,11 +98,6 @@ namespace UltimateMedDBWPFClient.Billing
                 BillPatientType.Text = null;
             }
         }
-        /*
-        private void DataGrid_SourceUpdated(object sender, DataTransferEventArgs e)
-        {
-            DgPatientBills.Items.Refresh();
-        }
-        */
+
     }
 }

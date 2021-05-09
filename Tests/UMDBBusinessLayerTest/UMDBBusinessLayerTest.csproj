@@ -53,6 +53,7 @@
     <Compile Include="LabTest.cs" />
     <Compile Include="PatientTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoomTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
