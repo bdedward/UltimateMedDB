@@ -33,5 +33,6 @@ namespace UMDBBusinessLayerTest
             Assert.AreEqual(expectedStatus, actualStatus);
             Assert.AreEqual(expectedType, actualType);
         }
+
     }
 }

@@ -7,6 +7,7 @@
         xmlns:billing="clr-namespace:UltimateMedDBWPFClient.Billing"
         xmlns:labs="clr-namespace:UltimateMedDBWPFClient.Labs"
         xmlns:patients="clr-namespace:UltimateMedDBWPFClient.Patients"
+        xmlns:rooms="clr-namespace:UltimateMedDBWPFClient.Rooms"
         mc:Ignorable="d"
         Title="Ultimate Med DB" Height="650" Width="900">
 
@@ -21,6 +22,10 @@
 
         <DataTemplate DataType="{x:Type patients:PatientViewModel}">
             <patients:PatientView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type rooms:RoomViewModel}">
+            <rooms:RoomView />
         </DataTemplate>
 
     </Window.Resources>
@@ -62,6 +67,10 @@
                     CommandParameter="patients" Grid.Column="1" Margin="0.2,33,159.8,-15" 
                     />
 
+                <Button Content="Room Management"
+                    Command="{Binding NavCommand}"
+                    CommandParameter="rooms" Grid.Column="1" Margin="156.2,33,9.8,-15"  
+                    />
 
             </Grid>
             <ContentControl Content="{Binding CurrentViewModel}" RenderTransformOrigin="0.5,0.5" Margin="-1,1,0.8,-48" Grid.Row="1">

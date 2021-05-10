@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="UltimateMedDBWPFClient.Rooms.RoomView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UltimateMedDBWPFClient.Rooms"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel>
+            <TextBox Text="Patient Lookup" FontSize="20"/>
+            <ComboBox Name="cboAllPatients"  SelectedItem ="{Binding SelectedPatient}" ItemsSource="{Binding AllPatients}" DisplayMemberPath="Name" Width="250" SelectionChanged="CboAllPatients_SelectionChanged" />
+            <DataGrid Name="dgCurrentPatient" ItemsSource="{Binding SelectedPatient}" DataContext=""/>
+            <WrapPanel>
+                <Label>Name</Label>
+                <TextBox Name="PatientName" Width="140" Text="{Binding SelectedPatient.Name}" />
+                <Label>Gender</Label>
+                <TextBox Name="PatientGender" Width="80" Text="{Binding SelectedPatient.Gender}" />
+                <Label>Age</Label>
+                <TextBox Name="PatientAge" Width="30" Text="{Binding SelectedPatient.Age}" />
+                <Label>Phone</Label>
+                <TextBox Name="PatientPhone" Width="140" Text="{Binding SelectedPatient.Phone}" />
+                <Label>Weight</Label>
+                <TextBox Name="PatientWeight" Width="30" Text="{Binding SelectedPatient.Weight}" />
+            </WrapPanel>
+            <WrapPanel>
+                <Label>Address</Label>
+                <TextBox Name ="PatientAddress" Width="190" Text="{Binding SelectedPatient.Address}" />
+                <Label>Doc_Id</Label>
+                <TextBox Name ="PatientDocId" Width="48" Text="{Binding SelectedPatient.Doc_Id}" />
+                <Label>Disease</Label>
+                <TextBox Name="PatientDisease" Width="85" Text="{Binding SelectedPatient.Disease}" />
+            </WrapPanel>
+        
+
+            <TextBox Text="Available Rooms" FontSize="20" />
+            <DataGrid Name="dgAvailableRooms" ItemsSource="{Binding AvailableRooms}" DataContext="" />
+            <Button Click="Button_Click" >Get Available Rooms</Button>
+
+            <TextBox Text="Add a New Room" FontSize="20" />
+            <WrapPanel>
+                <Label>Room Number</Label>
+                <TextBox Name ="RoomNumber" Width="190" Text="{Binding NewRoom.Number}" />
+                <Label>Room Type</Label>
+                <TextBox Name ="RoomType" Width="48" Text="{Binding NewRoom.Type}" />
+            </WrapPanel>
+            <Button Click="Button_Click_1" >Save New Room</Button>
+
+            <TextBox Text="Remove a Room from the system" FontSize="20" />
+
+
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -60,10 +60,38 @@ namespace UltimateMedDB.Business
             taPatientRow.UnassignRoom(patient_id, room_id);
         }
 
-        public static void AddNewRoom(Room newRoom)
+        public static string GetRoomStatus(int roomNumber)
         {
             RoomTableAdapter taRoom = new RoomTableAdapter();
-            taRoom.InsertRoomData(newRoom.Number, newRoom.Type, newRoom.Status);
+            string status = taRoom.CheckRoomStatus(roomNumber);
+            return status;
+        }
+
+        public static bool AddNewRoom(Room newRoom)
+        {
+            RoomTableAdapter taRoom = new RoomTableAdapter();
+            string status = taRoom.CheckRoomStatus(newRoom.Number);
+            if (status == "available" || status == "occupied")
+                return false;
+            else
+            {
+                taRoom.InsertRoomData(newRoom.Number, newRoom.Type, "available");
+                return true;
+            }
+
+        }
+
+        public static bool RemoveRoom(int roomNumber)
+        {
+            RoomTableAdapter taRoom = new RoomTableAdapter();
+            string status = taRoom.CheckRoomStatus(roomNumber);
+            if (status != "occupied")
+            {
+                taRoom.RemoveRoom(roomNumber);
+                return true;
+            }
+            else
+                return false;
         }
 
         public List<Room> AvailableRooms { get; set; }

@@ -5,6 +5,7 @@ using UltimateMedDBWPFClient;
 using UltimateMedDBWPFClient.Billing;
 using UltimateMedDBWPFClient.Labs;
 using UltimateMedDBWPFClient.Patients;
+using UltimateMedDBWPFClient.Rooms;
 
 namespace UltimateMedDBWPFClient
 {
@@ -13,6 +14,7 @@ namespace UltimateMedDBWPFClient
         private PatientBillingViewModel _billingViewModel = new PatientBillingViewModel();
         private LabViewModel _labViewModel = new LabViewModel();
         private PatientViewModel _patientViewModel = new PatientViewModel();
+        private RoomViewModel _roomViewModel = new RoomViewModel();
         //private OrderPrepViewModel _orderPrepViewModel = new OrderPrepViewModel();
         //private AddEditCustomerViewModel _addEditViewModel = new AddEditCustomerViewModel();
 
@@ -50,28 +52,11 @@ namespace UltimateMedDBWPFClient
                 case "patients":
                     CurrentViewModel = _patientViewModel;
                     break;
+                case "rooms":
+                    CurrentViewModel = _roomViewModel;
+                    break;
             }
         }
 
-        private void NavToOrder(Guid customerId)
-        {
-            //_billing = customerId;
-            //CurrentViewModel = _orderViewModel;
-        }
-/*
-        private void NavToAddCustomer(Billing cust)
-        {
-            _addEditViewModel.EditMode = false;
-            _addEditViewModel.SetCustomer(cust);
-            CurrentViewModel = _addEditViewModel;
-        }
-
-        private void NavToEditCustomer(Customer cust)
-        {
-            _addEditViewModel.EditMode = true;
-            _addEditViewModel.SetCustomer(cust);
-            CurrentViewModel = _addEditViewModel;
-        }
-*/
     }
 }
